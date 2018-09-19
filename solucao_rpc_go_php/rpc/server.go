@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"rpc_go_php/goridge"
+	"rafael.castro.sd.ufg/solucao_rpc_go_php/goridge"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"net"	
