@@ -33,7 +33,6 @@ func (a *Pessoa) Salvar(pessoa Pessoa, r *string) error {
 		return nil
 	}
 
-
 	*r = "salvo com sucesso!\n"
 
 	return nil
@@ -89,7 +88,7 @@ func main() {
 	}
 
 	rpc.Register(new(Pessoa))
-	log.Printf("started")
+	log.Printf("Servidor iniciado.")
 
 	for {
 		conn, err := ln.Accept()
@@ -97,7 +96,7 @@ func main() {
 			continue
 		}
 
-		log.Printf("new connection %+v", conn)
+		log.Printf("nova conexão %+v", conn)
 		go rpc.ServeCodec(goridge.NewCodec(conn))
 	}
     
