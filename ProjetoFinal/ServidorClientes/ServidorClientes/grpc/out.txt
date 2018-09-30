@@ -1,0 +1,4 @@
+$ sudo /home/perninha/.nuget/packages/grpc.tools/1.15.0/tools/linux_x64/protoc --csharp_out . --grpc_out . ServidorClientes.proto --plugin=protoc-gen-grpc=/home/perninha/.nuget/packages/grpc.tools/1.15.0/tools/linux_x64/grpc_csharp_plugin
+
+~/.nuget/packages/grpc.tools/1.15.0/tools/linux_x64/grpc_csharp_plugin: program not found or is not executable
+--grpc_out: protoc-gen-grpc: Plugin failed with status code 1.
