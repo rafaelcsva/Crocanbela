@@ -1,23 +1,13 @@
 package main
 
 import(
+	"rafael.castro.sd.ufg/ProjetoFinal/ServidorNomes/server"
 	"rafael.castro.sd.ufg/ProjetoFinal/ServidorNomes/ServidorNomes"
-	"context"
 	"google.golang.org/grpc"
 	"log"
 	"net"
 	"fmt"
 )
-
-type server struct{}
-
-var listLogin []ServidorNomes.RegistroServico
-
-func (s *server) Cadastrar(ctx context.Context, in *ServidorNomes.RegistroServico) (*ServidorNomes.RegistroServico, error){
-	listLogin = append(listLogin, *in)
-
-	return in, nil
-}
 
 const (
 	port = 1808
@@ -29,9 +19,10 @@ func main(){
 	if(err != nil){
 		log.Fatal(err)
 	}
-
+	
+	s, err := server.Criar()
 	grpcServer := grpc.NewServer()
-	ServidorNomes.RegisterNomesServer(grpcServer, &server{})
+	ServidorNomes.RegisterNomesServer(grpcServer, &s)
 
 	log.Printf("Servidor de nomes iniciado!")
 

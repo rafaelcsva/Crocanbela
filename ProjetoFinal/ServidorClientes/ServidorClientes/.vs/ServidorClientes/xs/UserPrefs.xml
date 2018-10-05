@@ -1,7 +1,8 @@
 ﻿<Properties StartupConfiguration="{6C1C52FA-3F57-425F-8724-A2BA38180ED1}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="Program.cs">
     <Files>
-      <File FileName="Program.cs" Line="4" Column="1" />
+      <File FileName="Program.cs" Line="22" Column="2" />
+      <File FileName="grpc/ServidorNomes.proto" Line="21" Column="68" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

@@ -13,13 +13,22 @@ namespace ServidorNomes {
     static readonly string __ServiceName = "ServidorNomes.Nomes";
 
     static readonly grpc::Marshaller<global::ServidorNomes.RegistroServico> __Marshaller_ServidorNomes_RegistroServico = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::ServidorNomes.RegistroServico.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::ServidorNomes.ServicoResponse> __Marshaller_ServidorNomes_ServicoResponse = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::ServidorNomes.ServicoResponse.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::ServidorNomes.ServicoRequest> __Marshaller_ServidorNomes_ServicoRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::ServidorNomes.ServicoRequest.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::ServidorNomes.RegistroServico, global::ServidorNomes.RegistroServico> __Method_Cadastrar = new grpc::Method<global::ServidorNomes.RegistroServico, global::ServidorNomes.RegistroServico>(
+    static readonly grpc::Method<global::ServidorNomes.RegistroServico, global::ServidorNomes.ServicoResponse> __Method_Cadastrar = new grpc::Method<global::ServidorNomes.RegistroServico, global::ServidorNomes.ServicoResponse>(
         grpc::MethodType.Unary,
         __ServiceName,
         "Cadastrar",
         __Marshaller_ServidorNomes_RegistroServico,
-        __Marshaller_ServidorNomes_RegistroServico);
+        __Marshaller_ServidorNomes_ServicoResponse);
+
+    static readonly grpc::Method<global::ServidorNomes.ServicoRequest, global::ServidorNomes.ServicoResponse> __Method_ObterServico = new grpc::Method<global::ServidorNomes.ServicoRequest, global::ServidorNomes.ServicoResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "ObterServico",
+        __Marshaller_ServidorNomes_ServicoRequest,
+        __Marshaller_ServidorNomes_ServicoResponse);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -30,7 +39,12 @@ namespace ServidorNomes {
     /// <summary>Base class for server-side implementations of Nomes</summary>
     public abstract partial class NomesBase
     {
-      public virtual global::System.Threading.Tasks.Task<global::ServidorNomes.RegistroServico> Cadastrar(global::ServidorNomes.RegistroServico request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::ServidorNomes.ServicoResponse> Cadastrar(global::ServidorNomes.RegistroServico request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::ServidorNomes.ServicoResponse> ObterServico(global::ServidorNomes.ServicoRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -60,21 +74,37 @@ namespace ServidorNomes {
       {
       }
 
-      public virtual global::ServidorNomes.RegistroServico Cadastrar(global::ServidorNomes.RegistroServico request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::ServidorNomes.ServicoResponse Cadastrar(global::ServidorNomes.RegistroServico request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Cadastrar(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::ServidorNomes.RegistroServico Cadastrar(global::ServidorNomes.RegistroServico request, grpc::CallOptions options)
+      public virtual global::ServidorNomes.ServicoResponse Cadastrar(global::ServidorNomes.RegistroServico request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Cadastrar, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::ServidorNomes.RegistroServico> CadastrarAsync(global::ServidorNomes.RegistroServico request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::ServidorNomes.ServicoResponse> CadastrarAsync(global::ServidorNomes.RegistroServico request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return CadastrarAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::ServidorNomes.RegistroServico> CadastrarAsync(global::ServidorNomes.RegistroServico request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::ServidorNomes.ServicoResponse> CadastrarAsync(global::ServidorNomes.RegistroServico request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Cadastrar, null, options, request);
+      }
+      public virtual global::ServidorNomes.ServicoResponse ObterServico(global::ServidorNomes.ServicoRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ObterServico(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::ServidorNomes.ServicoResponse ObterServico(global::ServidorNomes.ServicoRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_ObterServico, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::ServidorNomes.ServicoResponse> ObterServicoAsync(global::ServidorNomes.ServicoRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ObterServicoAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::ServidorNomes.ServicoResponse> ObterServicoAsync(global::ServidorNomes.ServicoRequest request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_ObterServico, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override NomesClient NewInstance(ClientBaseConfiguration configuration)
@@ -88,7 +118,8 @@ namespace ServidorNomes {
     public static grpc::ServerServiceDefinition BindService(NomesBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_Cadastrar, serviceImpl.Cadastrar).Build();
+          .AddMethod(__Method_Cadastrar, serviceImpl.Cadastrar)
+          .AddMethod(__Method_ObterServico, serviceImpl.ObterServico).Build();
     }
 
   }

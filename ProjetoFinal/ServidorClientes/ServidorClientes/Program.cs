@@ -15,8 +15,8 @@ namespace ServidorClientes
 
 			var client = new Nomes.NomesClient(channel);
 
-			var resp = client.Cadastrar(new RegistroServico { Host = "localhost", Porta = 1808, Servico = "Clientes" });
-			Console.WriteLine(resp.Host + " recebeu ok!");
+			var resp = client.Cadastrar(new RegistroServico { Host = "localhost", Porta = 1808, Servico = "Cliente" });
+			Console.WriteLine(resp.Message);
         }
     }
 }
