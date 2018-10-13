@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package ServidorClientes;
+
+message RegistroCliente{
+    int32 id = 1;
+    string nome = 2;
+    string email = 3;
+    string telefone = 4;
+    string dataCadastro = 5;
+}
+
+message ClienteResponse{
+    string message = 1;
+}
+
+message ModoBusca{
+    enum Modo{
+        NOME = 0;
+        ID = 1;
+        TODOS = 2;
+    }
+
+    Modo tipo  = 1;
+    int32 id = 2;
+    string nome = 3;
+
+
+}
+
+message Resultado{
+    repeated RegistroCliente clientes = 1;
+    ClienteResponse message = 2;
+    int32 error = 3;
+}
+
+service Clientes{
+    rpc Salvar(RegistroCliente) returns (ClienteResponse){}
+    rpc Buscar(ModoBusca) returns (Resultado){}
+}
