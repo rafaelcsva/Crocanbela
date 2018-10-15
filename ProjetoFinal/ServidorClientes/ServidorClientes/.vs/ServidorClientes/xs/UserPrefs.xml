@@ -1,11 +1,13 @@
 ﻿<Properties StartupConfiguration="{6C1C52FA-3F57-425F-8724-A2BA38180ED1}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Modelo/Cliente.cs">
     <Files>
       <File FileName="Modelo/BancoDeDados.cs" Line="14" Column="43" />
-      <File FileName="Servidor.cs" Line="30" Column="7" />
-      <File FileName="grpc/ServidorClientes.proto" Line="34" Column="16" />
+      <File FileName="Servidor.cs" Line="48" Column="21" />
+      <File FileName="grpc/ServidorClientes.proto" Line="26" Column="18" />
+      <File FileName="Program.cs" Line="41" Column="5" />
+      <File FileName="Config/InfoServidores.json" Line="4" Column="22" />
+      <File FileName="grpc/ServidorNomes.proto" Line="14" Column="21" />
       <File FileName="Modelo/Cliente.cs" Line="23" Column="55" />
-      <File FileName="Program.cs" Line="19" Column="36" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

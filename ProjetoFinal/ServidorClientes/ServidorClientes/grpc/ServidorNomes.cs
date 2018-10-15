@@ -26,20 +26,20 @@ namespace ServidorNomes {
           string.Concat(
             "ChNTZXJ2aWRvck5vbWVzLnByb3RvEg1TZXJ2aWRvck5vbWVzIj8KD1JlZ2lz",
             "dHJvU2VydmljbxIMCgRob3N0GAEgASgJEg0KBXBvcnRhGAIgASgFEg8KB3Nl",
-            "cnZpY28YAyABKAkiUwoPU2Vydmljb1Jlc3BvbnNlEi8KB3NlcnZpY28YASAB",
+            "cnZpY28YAyABKAkiYgoPU2Vydmljb1Jlc3BvbnNlEi8KB3NlcnZpY28YASAB",
             "KAsyHi5TZXJ2aWRvck5vbWVzLlJlZ2lzdHJvU2VydmljbxIPCgdtZXNzYWdl",
-            "GAIgASgJIjcKCVJlbGF0b3JpbxIMCgRob3N0GAEgASgJEhwKFE51bWVyb0Nv",
-            "bmV4b2VzQXRpdmFzGAIgASgFIiEKDlNlcnZpY29SZXF1ZXN0Eg8KB3NlcnZp",
-            "Y28YASABKAkypwEKBU5vbWVzEk0KCUNhZGFzdHJhchIeLlNlcnZpZG9yTm9t",
-            "ZXMuUmVnaXN0cm9TZXJ2aWNvGh4uU2Vydmlkb3JOb21lcy5TZXJ2aWNvUmVz",
-            "cG9uc2UiABJPCgxPYnRlclNlcnZpY28SHS5TZXJ2aWRvck5vbWVzLlNlcnZp",
-            "Y29SZXF1ZXN0Gh4uU2Vydmlkb3JOb21lcy5TZXJ2aWNvUmVzcG9uc2UiAGIG",
-            "cHJvdG8z"));
+            "GAIgASgJEg0KBWVycm9yGAMgASgFIjcKCVJlbGF0b3JpbxIMCgRob3N0GAEg",
+            "ASgJEhwKFE51bWVyb0NvbmV4b2VzQXRpdmFzGAIgASgFIiEKDlNlcnZpY29S",
+            "ZXF1ZXN0Eg8KB3NlcnZpY28YASABKAkypwEKBU5vbWVzEk0KCUNhZGFzdHJh",
+            "chIeLlNlcnZpZG9yTm9tZXMuUmVnaXN0cm9TZXJ2aWNvGh4uU2Vydmlkb3JO",
+            "b21lcy5TZXJ2aWNvUmVzcG9uc2UiABJPCgxPYnRlclNlcnZpY28SHS5TZXJ2",
+            "aWRvck5vbWVzLlNlcnZpY29SZXF1ZXN0Gh4uU2Vydmlkb3JOb21lcy5TZXJ2",
+            "aWNvUmVzcG9uc2UiAGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::ServidorNomes.RegistroServico), global::ServidorNomes.RegistroServico.Parser, new[]{ "Host", "Porta", "Servico" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ServidorNomes.ServicoResponse), global::ServidorNomes.ServicoResponse.Parser, new[]{ "Servico", "Message" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ServidorNomes.ServicoResponse), global::ServidorNomes.ServicoResponse.Parser, new[]{ "Servico", "Message", "Error" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ServidorNomes.Relatorio), global::ServidorNomes.Relatorio.Parser, new[]{ "Host", "NumeroConexoesAtivas" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ServidorNomes.ServicoRequest), global::ServidorNomes.ServicoRequest.Parser, new[]{ "Servico" }, null, null, null)
           }));
@@ -260,6 +260,7 @@ namespace ServidorNomes {
     public ServicoResponse(ServicoResponse other) : this() {
       servico_ = other.servico_ != null ? other.servico_.Clone() : null;
       message_ = other.message_;
+      error_ = other.error_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -290,6 +291,17 @@ namespace ServidorNomes {
       }
     }
 
+    /// <summary>Field number for the "error" field.</summary>
+    public const int ErrorFieldNumber = 3;
+    private int error_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Error {
+      get { return error_; }
+      set {
+        error_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as ServicoResponse);
@@ -305,6 +317,7 @@ namespace ServidorNomes {
       }
       if (!object.Equals(Servico, other.Servico)) return false;
       if (Message != other.Message) return false;
+      if (Error != other.Error) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -313,6 +326,7 @@ namespace ServidorNomes {
       int hash = 1;
       if (servico_ != null) hash ^= Servico.GetHashCode();
       if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (Error != 0) hash ^= Error.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -334,6 +348,10 @@ namespace ServidorNomes {
         output.WriteRawTag(18);
         output.WriteString(Message);
       }
+      if (Error != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Error);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -347,6 +365,9 @@ namespace ServidorNomes {
       }
       if (Message.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+      }
+      if (Error != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Error);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -368,6 +389,9 @@ namespace ServidorNomes {
       if (other.Message.Length != 0) {
         Message = other.Message;
       }
+      if (other.Error != 0) {
+        Error = other.Error;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -388,6 +412,10 @@ namespace ServidorNomes {
           }
           case 18: {
             Message = input.ReadString();
+            break;
+          }
+          case 24: {
+            Error = input.ReadInt32();
             break;
           }
         }

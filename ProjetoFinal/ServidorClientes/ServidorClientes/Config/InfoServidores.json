@@ -1,0 +1,10 @@
+﻿{
+    "nomes": {
+        "host": "localhost",
+        "porta": 1808
+    },
+    "clientes":{
+        "host": "localhost",
+        "porta": 5001
+    }
+}

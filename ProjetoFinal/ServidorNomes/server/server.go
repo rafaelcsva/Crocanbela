@@ -1,7 +1,7 @@
 package server
 
 import(
-	"rafael.castro.sd.ufg/ProjetoFinal/ServidorNomes/ServidorNomes"
+	"rafael.castro.sd.ufg/ProjetoFinal/ServidorNomes/grpc/ServidorNomes"
 	"context"
 	"log"
 	"sync"
@@ -40,9 +40,11 @@ func (s *server) Cadastrar(ctx context.Context, in *ServidorNomes.RegistroServic
 	log.Printf("Chamada a cadastros recebida! ")
 
 	response := ServidorNomes.ServicoResponse{}
+	response.Error = 0;
 
 	if(!Valido(in.Servico, s.servicosOferecidos)){
 		response.Message = in.Servico + " é um servico que nao está sendo oferecido!"
+		response.Error = 1;
 		return &response, nil
 	}
 
@@ -59,9 +61,12 @@ func (s *server) ObterServico(ctx context.Context, in *ServidorNomes.ServicoRequ
 	log.Printf("Chamada a obter serviços recebida!")
 
 	response := ServidorNomes.ServicoResponse{}
+	response.Error = 0;
 
 	if(!Valido(in.Servico, s.servicosOferecidos)){
 		response.Message = in.Servico + " é um servico que não está sendo oferecido!"
+		response.Error = 1;
+
 		return &response, nil
 	}
 
@@ -72,7 +77,7 @@ func (s *server) ObterServico(ctx context.Context, in *ServidorNomes.ServicoRequ
 		return &response, nil
 	}else{
 		response.Message = "Nenhum servico de " + in.Servico + " está ativo no momento!"
-		response.Servico.Porta = -1
+		response.Error = 1;
 
 		return &response, nil
 	}

@@ -1,33 +1,66 @@
 ﻿using System;
+using System.IO;
 using ServidorNomes;
 using Grpc.Core;
+using Newtonsoft.Json.Linq;
 
 namespace ServidorClientes
 {
-    class Program
-    {
-		const int Port = 50051;
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			var file = File.ReadAllText("./Config/InfoServidores.json");
 
-        static void Main(string[] args)
-        {
-			/*const string host = "localhost";
-			const int port = 1808;
-
-			Channel channel = new Channel(host + ":" + port.ToString(), ChannelCredentials.Insecure);
-
-			var client = new Nomes.NomesClient(channel);
-
-			var resp = client.Cadastrar(new RegistroServico { Host = "localhost", Porta = 1808, Servico = "Cliente" });
-			Console.WriteLine(resp.Message);*/
-			Server server = new Server
+			try
 			{
-				Services = { Clientes.BindService(new Servidor()) },
-				Ports = { new ServerPort("localhost", Port, ServerCredentials.Insecure) }
-			};
+				var conf = JObject.Parse(file);
 
-			server.Start();
+				var hostClient = conf["clientes"]["host"].ToString();
+				var portaClient = Int32.Parse(conf["clientes"]["porta"].ToString());
 
-			Console.WriteLine("Servidor de Clientes Ativo!");
-        }
-    }
+				Server server = new Server
+				{
+					Services = { Clientes.BindService(new Servidor()) },
+					Ports = { new ServerPort(hostClient, portaClient, ServerCredentials.Insecure) }
+				};
+
+				server.Start();
+				Console.WriteLine("Servidor de Clientes Ativo!");
+
+				Console.WriteLine("Conectando com o servidor de nomes para registrar servico!");
+
+				var hostNome = conf["nomes"]["host"].ToString();
+				var portNome = conf["nomes"]["porta"].ToString();
+
+				Channel channel = new Channel(hostNome + ":" + portNome, ChannelCredentials.Insecure);
+
+				var client = new Nomes.NomesClient(channel);
+
+				var resp = client.Cadastrar(new RegistroServico { Host = "localhost", Porta = 1808, Servico = "Cliente" });
+
+				if (resp.Error != 0)
+				{
+					throw new Exception("Erro ao cadastrar servico!\n" + resp.Message);
+				}
+
+				Console.WriteLine(resp.Message);
+
+				var exitEvent = new System.Threading.ManualResetEvent(false);
+
+				Console.CancelKeyPress += (sender, e) => exitEvent.Set();
+
+				exitEvent.WaitOne();
+
+				server.ShutdownAsync().Wait();
+
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("Erro ocorrido ao iniciar servidor de clientes!\n" + e.Message);
+			}
+
+
+		}
+	}
 }

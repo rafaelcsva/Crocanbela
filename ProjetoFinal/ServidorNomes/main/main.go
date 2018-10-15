@@ -2,7 +2,8 @@ package main
 
 import(
 	"rafael.castro.sd.ufg/ProjetoFinal/ServidorNomes/server"
-	"rafael.castro.sd.ufg/ProjetoFinal/ServidorNomes/ServidorNomes"
+	"rafael.castro.sd.ufg/ProjetoFinal/ServidorNomes/grpc/ServidorNomes"
+	"rafael.castro.sd.ufg/ProjetoFinal/ServidorNomes/grpc/ServidorClientes"
 	"google.golang.org/grpc"
 	"log"
 	"net"
@@ -23,7 +24,7 @@ func main(){
 	s, err := server.Criar()
 	grpcServer := grpc.NewServer()
 	ServidorNomes.RegisterNomesServer(grpcServer, &s)
-
+	
 	log.Printf("Servidor de nomes iniciado!")
 
 	grpcServer.Serve(ln)

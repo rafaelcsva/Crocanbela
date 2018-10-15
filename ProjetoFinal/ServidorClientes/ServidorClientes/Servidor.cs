@@ -10,11 +10,13 @@ namespace ServidorClientes
 		public override Task<ClienteResponse> Salvar(RegistroCliente rcliente, ServerCallContext context){
 			var cliente = new Cliente(rcliente);
 			var response = new ClienteResponse();
+			response.Error = 1;
 
 			try{
 				Cliente.Salvar(cliente);
 			}catch(Exception e){
 				response.Message = e.Message;
+				response.Error = 1;
 
 				return Task.FromResult(response);
 			}
@@ -53,8 +55,7 @@ namespace ServidorClientes
 				}
 
 			}catch(Exception e){
-				response.Message = new ClienteResponse { Message = e.Message };
-				response.Error = 1;
+				response.Message = new ClienteResponse { Message = e.Message, Error = 1 };
 
 				return Task.FromResult(response);
 			}

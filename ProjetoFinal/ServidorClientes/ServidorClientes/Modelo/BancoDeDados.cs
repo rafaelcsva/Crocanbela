@@ -12,7 +12,8 @@ namespace ServidorClientes.Modelo
             UserID = "root",
             Password = "q8p8ugf3",
             Database = "projeto.clientes",
-            Port = 3306
+            Port = 3306,
+			SslMode = MySqlSslMode.None
         };
         
         private static MySqlConnection connect = new MySqlConnection(connectionStringBuilder.ConnectionString);
