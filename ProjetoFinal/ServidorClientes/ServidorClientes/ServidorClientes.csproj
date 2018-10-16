@@ -21,4 +21,7 @@
   <ItemGroup>
     <Compile Remove="ServidorClientes.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Config\InfoServidores.json" />
+  </ItemGroup>
 </Project>

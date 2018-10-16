@@ -1,27 +1,41 @@
 ﻿using System;
+using System.IO;
 using MySql.Data.MySqlClient;
 using System.Data;
+using Newtonsoft.Json.Linq;
 
 namespace ServidorClientes.Modelo
 {
 	public class BancoDeDados
     {
-        private static MySqlConnectionStringBuilder connectionStringBuilder = new MySqlConnectionStringBuilder
-        {
-            Server = "localhost",
-            UserID = "root",
-            Password = "q8p8ugf3",
-            Database = "projeto.clientes",
-            Port = 3306,
-			SslMode = MySqlSslMode.None
-        };
+		private static bool inicializada = false;
+		private static MySqlConnectionStringBuilder connectionStringBuilder;
         
-        private static MySqlConnection connect = new MySqlConnection(connectionStringBuilder.ConnectionString);
+        private static MySqlConnection connect;
 
         private static void Conectar()
         {
             try
             {
+				if(!inicializada){
+					var file = File.ReadAllText("./Config/Info.json");
+                    var conf = JObject.Parse(file);
+
+					connectionStringBuilder = new MySqlConnectionStringBuilder
+                    {
+						Server = conf["banco"]["host"].ToString(),
+						UserID = conf["banco"]["userID"].ToString(),
+						Password = conf["banco"]["password"].ToString(),
+						Database = conf["banco"]["database"].ToString(),
+						Port = uint.Parse(conf["banco"]["porta"].ToString()),
+                        SslMode = MySqlSslMode.None
+                    };
+
+					connect = new MySqlConnection(connectionStringBuilder.ConnectionString);
+
+					inicializada = true;
+				}
+
                 connect.Open();
             }
             catch (MySqlException e)

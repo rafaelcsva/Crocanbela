@@ -27,22 +27,25 @@ namespace ServidorClientes {
             "ChZTZXJ2aWRvckNsaWVudGVzLnByb3RvEhBTZXJ2aWRvckNsaWVudGVzImIK",
             "D1JlZ2lzdHJvQ2xpZW50ZRIKCgJpZBgBIAEoBRIMCgRub21lGAIgASgJEg0K",
             "BWVtYWlsGAMgASgJEhAKCHRlbGVmb25lGAQgASgJEhQKDGRhdGFDYWRhc3Ry",
-            "bxgFIAEoCSIxCg9DbGllbnRlUmVzcG9uc2USDwoHbWVzc2FnZRgBIAEoCRIN",
-            "CgVlcnJvchgCIAEoBSJ6CglNb2RvQnVzY2ESLgoEdGlwbxgBIAEoDjIgLlNl",
-            "cnZpZG9yQ2xpZW50ZXMuTW9kb0J1c2NhLk1vZG8SCgoCaWQYAiABKAUSDAoE",
-            "bm9tZRgDIAEoCSIjCgRNb2RvEggKBE5PTUUQABIGCgJJRBABEgkKBVRPRE9T",
-            "EAIidAoJUmVzdWx0YWRvEjMKCGNsaWVudGVzGAEgAygLMiEuU2Vydmlkb3JD",
-            "bGllbnRlcy5SZWdpc3Ryb0NsaWVudGUSMgoHbWVzc2FnZRgCIAEoCzIhLlNl",
-            "cnZpZG9yQ2xpZW50ZXMuQ2xpZW50ZVJlc3BvbnNlMqIBCghDbGllbnRlcxJQ",
-            "CgZTYWx2YXISIS5TZXJ2aWRvckNsaWVudGVzLlJlZ2lzdHJvQ2xpZW50ZRoh",
-            "LlNlcnZpZG9yQ2xpZW50ZXMuQ2xpZW50ZVJlc3BvbnNlIgASRAoGQnVzY2Fy",
-            "EhsuU2Vydmlkb3JDbGllbnRlcy5Nb2RvQnVzY2EaGy5TZXJ2aWRvckNsaWVu",
-            "dGVzLlJlc3VsdGFkbyIAYgZwcm90bzM="));
+            "bxgFIAEoCSJmCg9DbGllbnRlUmVzcG9uc2USDwoHbWVzc2FnZRgBIAEoCRIz",
+            "CghyY2xpZW50ZRgCIAEoCzIhLlNlcnZpZG9yQ2xpZW50ZXMuUmVnaXN0cm9D",
+            "bGllbnRlEg0KBWVycm9yGAMgASgFInoKCU1vZG9CdXNjYRIuCgR0aXBvGAEg",
+            "ASgOMiAuU2Vydmlkb3JDbGllbnRlcy5Nb2RvQnVzY2EuTW9kbxIKCgJpZBgC",
+            "IAEoBRIMCgRub21lGAMgASgJIiMKBE1vZG8SCAoETk9NRRAAEgYKAklEEAES",
+            "CQoFVE9ET1MQAiJ0CglSZXN1bHRhZG8SMwoIY2xpZW50ZXMYASADKAsyIS5T",
+            "ZXJ2aWRvckNsaWVudGVzLlJlZ2lzdHJvQ2xpZW50ZRIyCgdtZXNzYWdlGAIg",
+            "ASgLMiEuU2Vydmlkb3JDbGllbnRlcy5DbGllbnRlUmVzcG9uc2Uy9QEKCENs",
+            "aWVudGVzElAKBlNhbHZhchIhLlNlcnZpZG9yQ2xpZW50ZXMuUmVnaXN0cm9D",
+            "bGllbnRlGiEuU2Vydmlkb3JDbGllbnRlcy5DbGllbnRlUmVzcG9uc2UiABJE",
+            "CgZCdXNjYXISGy5TZXJ2aWRvckNsaWVudGVzLk1vZG9CdXNjYRobLlNlcnZp",
+            "ZG9yQ2xpZW50ZXMuUmVzdWx0YWRvIgASUQoHRXhjbHVpchIhLlNlcnZpZG9y",
+            "Q2xpZW50ZXMuUmVnaXN0cm9DbGllbnRlGiEuU2Vydmlkb3JDbGllbnRlcy5D",
+            "bGllbnRlUmVzcG9uc2UiAGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::ServidorClientes.RegistroCliente), global::ServidorClientes.RegistroCliente.Parser, new[]{ "Id", "Nome", "Email", "Telefone", "DataCadastro" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ServidorClientes.ClienteResponse), global::ServidorClientes.ClienteResponse.Parser, new[]{ "Message", "Error" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ServidorClientes.ClienteResponse), global::ServidorClientes.ClienteResponse.Parser, new[]{ "Message", "Rcliente", "Error" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ServidorClientes.ModoBusca), global::ServidorClientes.ModoBusca.Parser, new[]{ "Tipo", "Id", "Nome" }, null, new[]{ typeof(global::ServidorClientes.ModoBusca.Types.Modo) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ServidorClientes.Resultado), global::ServidorClientes.Resultado.Parser, new[]{ "Clientes", "Message" }, null, null, null)
           }));
@@ -318,6 +321,7 @@ namespace ServidorClientes {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public ClienteResponse(ClienteResponse other) : this() {
       message_ = other.message_;
+      rcliente_ = other.rcliente_ != null ? other.rcliente_.Clone() : null;
       error_ = other.error_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -338,8 +342,19 @@ namespace ServidorClientes {
       }
     }
 
+    /// <summary>Field number for the "rcliente" field.</summary>
+    public const int RclienteFieldNumber = 2;
+    private global::ServidorClientes.RegistroCliente rcliente_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ServidorClientes.RegistroCliente Rcliente {
+      get { return rcliente_; }
+      set {
+        rcliente_ = value;
+      }
+    }
+
     /// <summary>Field number for the "error" field.</summary>
-    public const int ErrorFieldNumber = 2;
+    public const int ErrorFieldNumber = 3;
     private int error_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Error {
@@ -363,6 +378,7 @@ namespace ServidorClientes {
         return true;
       }
       if (Message != other.Message) return false;
+      if (!object.Equals(Rcliente, other.Rcliente)) return false;
       if (Error != other.Error) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -371,6 +387,7 @@ namespace ServidorClientes {
     public override int GetHashCode() {
       int hash = 1;
       if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (rcliente_ != null) hash ^= Rcliente.GetHashCode();
       if (Error != 0) hash ^= Error.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -389,8 +406,12 @@ namespace ServidorClientes {
         output.WriteRawTag(10);
         output.WriteString(Message);
       }
+      if (rcliente_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Rcliente);
+      }
       if (Error != 0) {
-        output.WriteRawTag(16);
+        output.WriteRawTag(24);
         output.WriteInt32(Error);
       }
       if (_unknownFields != null) {
@@ -403,6 +424,9 @@ namespace ServidorClientes {
       int size = 0;
       if (Message.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+      }
+      if (rcliente_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Rcliente);
       }
       if (Error != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Error);
@@ -420,6 +444,12 @@ namespace ServidorClientes {
       }
       if (other.Message.Length != 0) {
         Message = other.Message;
+      }
+      if (other.rcliente_ != null) {
+        if (rcliente_ == null) {
+          rcliente_ = new global::ServidorClientes.RegistroCliente();
+        }
+        Rcliente.MergeFrom(other.Rcliente);
       }
       if (other.Error != 0) {
         Error = other.Error;
@@ -439,7 +469,14 @@ namespace ServidorClientes {
             Message = input.ReadString();
             break;
           }
-          case 16: {
+          case 18: {
+            if (rcliente_ == null) {
+              rcliente_ = new global::ServidorClientes.RegistroCliente();
+            }
+            input.ReadMessage(rcliente_);
+            break;
+          }
+          case 24: {
             Error = input.ReadInt32();
             break;
           }

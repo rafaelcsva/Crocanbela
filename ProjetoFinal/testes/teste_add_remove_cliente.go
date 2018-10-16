@@ -25,15 +25,29 @@ func main(){
 	defer conn.Close()
 	client := ServidorClientes.NewClientesClient(conn)
 
-	reg := ServidorClientes.RegistroCliente{}
-	reg.Nome = "Jose"
+	reg := &ServidorClientes.RegistroCliente{}
+	reg.Nome = "Josssse Da Silvaa Alencar"
 	reg.Email = "jose@jose.com"
 	reg.Telefone = "6294949494"
 
-	resp, err := client.Salvar(context.Background(), &reg)
+	resp, err := client.Salvar(context.Background(), reg)
 
 	if err != nil {
 		log.Fatalf("Falha ao chamar servico de salvar %v", err)
+	}
+
+	if resp.Error != 0 {
+		log.Printf("Falha ao salvar registro!\n")
+	}
+
+	log.Printf(resp.Message);
+
+	ret := resp.Rcliente;
+
+	resp, err = client.Excluir(context.Background(), ret);
+
+	if err != nil {
+		log.Fatalf("Falha ao chamar servico de excluir %v", err)
 	}
 
 	if resp.Error != 0 {

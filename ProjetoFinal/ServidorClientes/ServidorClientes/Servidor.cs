@@ -10,7 +10,7 @@ namespace ServidorClientes
 		public override Task<ClienteResponse> Salvar(RegistroCliente rcliente, ServerCallContext context){
 			var cliente = new Cliente(rcliente);
 			var response = new ClienteResponse();
-			response.Error = 1;
+			response.Error = 0;
 
 			try{
 				Cliente.Salvar(cliente);
@@ -22,6 +22,26 @@ namespace ServidorClientes
 			}
 
 			response.Message = "Salvo com Sucesso!";
+			response.Rcliente = cliente.toRegistroCliente();
+			         
+			return Task.FromResult(response);
+		}
+
+		public override Task<ClienteResponse> Excluir(RegistroCliente registroCliente, ServerCallContext context){
+			var cliente = new Cliente(registroCliente);
+			var response = new ClienteResponse();
+			response.Error = 0;
+
+			try{
+				Cliente.Excluir(cliente);
+			}catch(Exception e){
+				response.Message = e.Message;
+				response.Error = 1;
+
+				return Task.FromResult(response);
+			}
+
+			response.Message = "Excluido com sucesso!";
 
 			return Task.FromResult(response);
 		}
@@ -60,7 +80,7 @@ namespace ServidorClientes
 				return Task.FromResult(response);
 			}
 
-			response.Message = new ClienteResponse { Message = "Busca ocorrida com sucesso!" };
+			response.Message = new ClienteResponse { Message = "Busca ocorrida com sucesso!", Error = 0 };
 
 			return Task.FromResult(response);
 		}

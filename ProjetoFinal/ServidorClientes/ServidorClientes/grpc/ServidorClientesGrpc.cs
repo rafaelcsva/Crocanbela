@@ -31,6 +31,13 @@ namespace ServidorClientes {
         __Marshaller_ServidorClientes_ModoBusca,
         __Marshaller_ServidorClientes_Resultado);
 
+    static readonly grpc::Method<global::ServidorClientes.RegistroCliente, global::ServidorClientes.ClienteResponse> __Method_Excluir = new grpc::Method<global::ServidorClientes.RegistroCliente, global::ServidorClientes.ClienteResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "Excluir",
+        __Marshaller_ServidorClientes_RegistroCliente,
+        __Marshaller_ServidorClientes_ClienteResponse);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -46,6 +53,11 @@ namespace ServidorClientes {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::ServidorClientes.Resultado> Buscar(global::ServidorClientes.ModoBusca request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::ServidorClientes.ClienteResponse> Excluir(global::ServidorClientes.RegistroCliente request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -107,6 +119,22 @@ namespace ServidorClientes {
       {
         return CallInvoker.AsyncUnaryCall(__Method_Buscar, null, options, request);
       }
+      public virtual global::ServidorClientes.ClienteResponse Excluir(global::ServidorClientes.RegistroCliente request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return Excluir(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::ServidorClientes.ClienteResponse Excluir(global::ServidorClientes.RegistroCliente request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_Excluir, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::ServidorClientes.ClienteResponse> ExcluirAsync(global::ServidorClientes.RegistroCliente request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ExcluirAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::ServidorClientes.ClienteResponse> ExcluirAsync(global::ServidorClientes.RegistroCliente request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_Excluir, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override ClientesClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -120,7 +148,8 @@ namespace ServidorClientes {
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_Salvar, serviceImpl.Salvar)
-          .AddMethod(__Method_Buscar, serviceImpl.Buscar).Build();
+          .AddMethod(__Method_Buscar, serviceImpl.Buscar)
+          .AddMethod(__Method_Excluir, serviceImpl.Excluir).Build();
     }
 
   }

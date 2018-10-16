@@ -10,7 +10,7 @@ namespace ServidorClientes
 	{
 		static void Main(string[] args)
 		{
-			var file = File.ReadAllText("./Config/InfoServidores.json");
+			var file = File.ReadAllText("./Config/Info.json");
 
 			try
 			{
