@@ -127,7 +127,8 @@ namespace ServidorClientes.Modelo
                 {
                     try
                     {
-                        a.Id = (int)BancoDeDados.executar("insert into clientes (nome,telefone,email,dataCadastro) values(?param1,?param2,?param3,?param4);", new object[] { a.Nome, a.Telefone, a.Email, a.dataCadastro });
+                        a.Id = (int)BancoDeDados.executar("insert into clientes (nome,telefone,email,dataCadastro) values(?param1,?param2,?param3,?param4);", 
+						                                  new object[] { a.Nome, a.Telefone, a.Email, a.dataCadastro });
                     }
                     catch (Exception e)
                     {
@@ -145,7 +146,8 @@ namespace ServidorClientes.Modelo
                 {
                     try
                     {
-                        BancoDeDados.executar("update clientes set nome=?param1,telefone=?param2,email=?param3,dataCadastro=?param4 where id = ?param5", new object[] { a.Nome, a.Telefone, a.Email, a.dataCadastro, a.Id });
+                        BancoDeDados.executar("update clientes set nome=?param1,telefone=?param2,email=?param3,dataCadastro=?param4 where id = ?param5", 
+						                      new object[] { a.Nome, a.Telefone, a.Email, a.dataCadastro, a.Id });
                     }
                     catch (Exception e)
                     {
@@ -163,7 +165,8 @@ namespace ServidorClientes.Modelo
         {
             try
             {
-                BancoDeDados.executar("delete from clientes where id=?param1", new object[] { b.Id });
+                BancoDeDados.executar("delete from clientes where id=?param1",
+				                      new object[] { b.Id });
             }
             catch (Exception e)
             {

@@ -17,7 +17,7 @@ func Criar()(server, error){
 	s := server{}
 	s.list = make(map[string][]ServidorNomes.RegistroServico)
 	s.mutex = make(map[string]*sync.Mutex)
-	s.servicosOferecidos = []string{"Login", "Cliente"}
+	s.servicosOferecidos = []string{"Login", "Cliente", "Usuario"}
 
 	for i := 0 ; i < len(s.servicosOferecidos) ; i++ {
 		s.mutex[s.servicosOferecidos[i]] = &sync.Mutex{}

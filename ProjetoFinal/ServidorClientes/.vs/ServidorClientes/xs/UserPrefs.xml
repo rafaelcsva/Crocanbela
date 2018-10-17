@@ -1,8 +1,9 @@
 ﻿<Properties StartupConfiguration="{390310A0-0B1A-45DE-8020-446E0632DF1B}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ServidorClientes/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ServidorClientes/Modelo/BancoDeDados.cs">
     <Files>
-      <File FileName="ServidorClientes/Program.cs" Line="23" Column="1" />
+      <File FileName="ServidorClientes/Program.cs" Line="4" Column="17" />
       <File FileName="ServidorClientes/grpc/out.txt" Line="1" Column="239" />
+      <File FileName="ServidorClientes/Modelo/BancoDeDados.cs" Line="113" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package ServidorUsuarios;
+
+message RegistroUsuario{
+    int32 id = 1;
+    string login = 2;
+    string senha = 3;
+}
+
+message UsuarioResponse{
+    string message = 1;
+    RegistroUsuario rusuario = 2;
+    int32 error = 3;
+}
+
+message ModoBusca{
+    enum Modo{
+        NOME = 0;
+        ID = 1;
+        TODOS = 2;
+    }
+
+    Modo tipo  = 1;
+    int32 id = 2;
+    string login = 3;
+}
+
+message Resultado{
+    repeated RegistroUsuario usuarios = 1;
+    UsuarioResponse message = 2;
+}
+
+service Usuarios{
+    rpc Salvar(RegistroUsuario) returns (UsuarioResponse){}
+    rpc Buscar(ModoBusca) returns (Resultado){}
+    rpc Excluir(RegistroUsuario) returns (UsuarioResponse){}
+}
