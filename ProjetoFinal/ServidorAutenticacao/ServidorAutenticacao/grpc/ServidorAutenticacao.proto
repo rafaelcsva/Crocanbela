@@ -1,0 +1,15 @@
+﻿syntax = "proto3";
+
+package ServidorAutenticacao;
+
+import "ServidorUsuarios.proto";
+
+message AutResponse{
+    ServidorUsuarios.RegistroUsuario rusuario = 1;
+    string message = 2;
+    int32 error = 3;
+}
+
+service Autenticacao{
+    rpc Autenticar(ServidorUsuarios.RegistroUsuario) returns (AutResponse){}
+}

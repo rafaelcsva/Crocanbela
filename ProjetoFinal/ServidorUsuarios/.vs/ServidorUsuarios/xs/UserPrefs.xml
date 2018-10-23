@@ -1,13 +1,9 @@
 ﻿<Properties StartupConfiguration="{3892CF03-C4AD-4B6F-905E-7D5CE45A99F9}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ServidorUsuarios/grpc/ServidorUsuarios.proto">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ServidorUsuarios/Program.cs">
     <Files>
-      <File FileName="ServidorUsuarios/Program.cs" Line="8" Column="10" />
-      <File FileName="ServidorUsuarios/Modelo/Usuario.cs" Line="35" Column="3" />
-      <File FileName="ServidorUsuarios/Modelo/BancoDeDados.cs" Line="62" Column="3" />
-      <File FileName="ServidorUsuarios/Config/Info.json" Line="8" Column="22" />
-      <File FileName="ServidorUsuarios/grpc/ServidorUsuarios.proto" Line="28" Column="1" />
-      <File FileName="ServidorUsuarios/grpc/ServidorNomes.proto" Line="5" Column="25" />
-      <File FileName="ServidorUsuarios/Servidor.cs" Line="81" Column="76" />
+      <File FileName="ServidorUsuarios/Program.cs" Line="33" Column="64" />
+      <File FileName="ServidorUsuarios/Servidor.cs" Line="119" Column="2" />
+      <File FileName="ServidorUsuarios/grpc/ServidorUsuarios.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

@@ -2,9 +2,8 @@
 using Grpc.Core;
 using Newtonsoft.Json.Linq;
 using System.IO;
-using ServidorNomes;
 
-namespace ServidorUsuarios
+namespace ServidorAutenticacao
 {
     class Program
     {
@@ -16,32 +15,32 @@ namespace ServidorUsuarios
             {
                 var conf = JObject.Parse(file);
 
-                var hostUser = conf["usuarios"]["host"].ToString();
-                var portaUser = Int32.Parse(conf["usuarios"]["porta"].ToString());
+                var hostAut = conf["autenticacao"]["host"].ToString();
+                var portaAut = Int32.Parse(conf["autenticacao"]["porta"].ToString());
 
                 Server server = new Server
                 {
-                    Services = { Usuarios.BindService(new Servidor()) },
-                    Ports = { new ServerPort(hostUser, portaUser, ServerCredentials.Insecure) }
+					Services = { Autenticacao.BindService(new Servidor()) },
+					Ports = { new ServerPort(hostAut, portaAut, ServerCredentials.Insecure) }
                 };
 
                 server.Start();
-                Console.WriteLine("Servidor de Usuarios Ativo!");
+                Console.WriteLine("Servidor de Autenticacao Ativo!");
 
                 Console.WriteLine("Conectando com o servidor de nomes para registrar servico!");
 
                 var hostNome = conf["nomes"]["host"].ToString();
                 var portNome = conf["nomes"]["porta"].ToString();
+                
+                var channel = new Channel(hostNome + ":" + portNome, ChannelCredentials.Insecure);
 
-                Channel channel = new Channel(hostNome + ":" + portNome, ChannelCredentials.Insecure);
+                var client = new ServidorNomes.Nomes.NomesClient(channel);
 
-                var client = new Nomes.NomesClient(channel);
-
-                var resp = client.Cadastrar(new RegistroServico
+                var resp = client.Cadastrar(new ServidorNomes.RegistroServico
                 {
-					Host = hostUser,
-					Porta = portaUser,
-                    Servico = "Usuario"
+					Host = hostAut,
+					Porta = portaAut,
+                    Servico = "Autenticacao"
                 });
 
                 if (resp.Error != 0)
@@ -62,7 +61,7 @@ namespace ServidorUsuarios
             }
             catch (Exception e)
             {
-                Console.WriteLine("Erro ocorrido ao iniciar servidor de clientes!\n" + e.Message);
+                Console.WriteLine("Erro ocorrido ao iniciar servidor de autenticacao!\n" + e.Message);
             }
         }
     }

@@ -1,0 +1,29 @@
+﻿syntax = "proto3";
+
+package ServidorNomes;
+
+message RegistroServico{
+    string host = 1;
+    int32 porta = 2;
+    string servico = 3;
+}
+
+message ServicoResponse{
+    RegistroServico servico = 1;
+    string message = 2;
+    int32 error = 3;
+}
+
+message Relatorio{
+    string host = 1;
+    int32 NumeroConexoesAtivas = 2;
+}
+
+message ServicoRequest{
+    string servico = 1;
+}
+
+service Nomes{
+    rpc Cadastrar(RegistroServico) returns (ServicoResponse){}
+    rpc ObterServico(ServicoRequest) returns (ServicoResponse){}
+}

@@ -2,87 +2,111 @@
 using Grpc.Core;
 using System.Threading.Tasks;
 using ServidorClientes.Modelo;
-
+	
 namespace ServidorClientes
 {
 	public class Servidor : Clientes.ClientesBase
     {
 		public override Task<ClienteResponse> Salvar(RegistroCliente rcliente, ServerCallContext context){
-			var cliente = new Cliente(rcliente);
-			var response = new ClienteResponse();
-			response.Error = 0;
+			return Task.Run(() =>
+			{
+				var cliente = new Cliente(rcliente);
+				var response = new ClienteResponse();
+				response.Error = 0;
 
-			try{
-				Cliente.Salvar(cliente);
-			}catch(Exception e){
-				response.Message = e.Message;
-				response.Error = 1;
+				try
+				{
+					Cliente.Salvar(cliente);
+				}
+				catch (Exception e)
+				{
+					response.Message = e.Message;
+					response.Error = 1;
 
-				return Task.FromResult(response);
-			}
+					return response;
+				}
 
-			response.Message = "Salvo com Sucesso!";
-			response.Rcliente = cliente.toRegistroCliente();
-			         
-			return Task.FromResult(response);
+				response.Message = "Salvo com Sucesso!";
+				response.Rcliente = cliente.toRegistroCliente();
+
+				return response;
+			});
+
 		}
 
 		public override Task<ClienteResponse> Excluir(RegistroCliente registroCliente, ServerCallContext context){
-			var cliente = new Cliente(registroCliente);
-			var response = new ClienteResponse();
-			response.Error = 0;
+			return Task.Run(() =>
+			{
+				var cliente = new Cliente(registroCliente);
+				var response = new ClienteResponse();
+				response.Error = 0;
 
-			try{
-				Cliente.Excluir(cliente);
-			}catch(Exception e){
-				response.Message = e.Message;
-				response.Error = 1;
+				try
+				{
+					Cliente.Excluir(cliente);
+				}
+				catch (Exception e)
+				{
+					response.Message = e.Message;
+					response.Error = 1;
 
-				return Task.FromResult(response);
-			}
+					return response;
+				}
 
-			response.Message = "Excluido com sucesso!";
+				response.Message = "Excluido com sucesso!";
 
-			return Task.FromResult(response);
+				return response;
+			});
 		}
   
 		public override Task<Resultado> Buscar(ModoBusca modo, ServerCallContext context){
-			var response = new Resultado();
-
-			try
+			return Task.Run(() =>
 			{
-				if (modo.Tipo == ModoBusca.Types.Modo.Id)
+
+				var response = new Resultado();
+
+				try
 				{
-					var cliente = Cliente.buscarPorId(modo.Id);
+					if (modo.Tipo == ModoBusca.Types.Modo.Id)
+					{
+						var cliente = Cliente.buscarPorId(modo.Id);
 
-					response.Clientes.Add(cliente.toRegistroCliente());
-				}
-				else if (modo.Tipo == ModoBusca.Types.Modo.Nome)
-				{
-					var cliente = Cliente.buscarPorNome(modo.Nome);
-
-					response.Clientes.Add(cliente.toRegistroCliente());
-
-				}else if (modo.Tipo == ModoBusca.Types.Modo.Todos){
-					var clientes = Cliente.Buscar();
-                    
-					foreach(Cliente cliente in clientes){
 						response.Clientes.Add(cliente.toRegistroCliente());
 					}
+					else if (modo.Tipo == ModoBusca.Types.Modo.Nome)
+					{
+						var cliente = Cliente.buscarPorNome(modo.Nome);
 
-				}else{
-					throw new Exception("Modo de busca nao reconhecido!");
+						response.Clientes.Add(cliente.toRegistroCliente());
+
+					}
+					else if (modo.Tipo == ModoBusca.Types.Modo.Todos)
+					{
+						var clientes = Cliente.Buscar();
+
+						foreach (Cliente cliente in clientes)
+						{
+							response.Clientes.Add(cliente.toRegistroCliente());
+						}
+
+					}
+					else
+					{
+						throw new Exception("Modo de busca nao reconhecido!");
+					}
+
+				}
+				catch (Exception e)
+				{
+					response.Message = new ClienteResponse { Message = e.Message, Error = 1 };
+
+					return response;
 				}
 
-			}catch(Exception e){
-				response.Message = new ClienteResponse { Message = e.Message, Error = 1 };
+				response.Message = new ClienteResponse { Message = "Busca ocorrida com sucesso!", Error = 0 };
 
-				return Task.FromResult(response);
-			}
-
-			response.Message = new ClienteResponse { Message = "Busca ocorrida com sucesso!", Error = 0 };
-
-			return Task.FromResult(response);
+				return response;
+			});
 		}
     }
 }

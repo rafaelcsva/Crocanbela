@@ -1,0 +1,18 @@
+﻿<Properties StartupConfiguration="{F9B948F7-4FCF-4A84-B94C-FABAEAFC4AEE}|Default">
+  <MonoDevelop.Ide.ItemProperties.ServidorAutenticacao PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ServidorAutenticacao/Program.cs">
+    <Files>
+      <File FileName="ServidorAutenticacao/Program.cs" Line="20" Column="5" />
+      <File FileName="ServidorAutenticacao/grpc/ServidorUsuarios.proto" Line="1" Column="10" />
+      <File FileName="ServidorAutenticacao/grpc/ServidorNomes.proto" Line="29" Column="2" />
+      <File FileName="ServidorAutenticacao/Servidor.cs" Line="51" Column="42" />
+      <File FileName="ServidorAutenticacao/Config/Info.json" Line="6" Column="7" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
