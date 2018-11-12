@@ -130,7 +130,7 @@ namespace ServidorUsuarios.Modelo
                 {
                     try
                     {
-                        BancoDeDados.executar("update usuarios set login=?param1, senha = ?param2 where id = ?param4;", new object[] { usuario.Login, usuario.Senha, usuario.Id });
+                        BancoDeDados.executar("update usuarios set login=?param1, senha = ?param2 where id = ?param3;", new object[] { usuario.Login, usuario.Senha, usuario.Id });
                     }
                     catch (Exception e)
                     {

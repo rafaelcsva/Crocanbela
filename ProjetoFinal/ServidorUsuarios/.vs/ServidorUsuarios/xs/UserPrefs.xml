@@ -1,9 +1,10 @@
 ﻿<Properties StartupConfiguration="{3892CF03-C4AD-4B6F-905E-7D5CE45A99F9}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ServidorUsuarios/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ServidorUsuarios/Config/Info.json">
     <Files>
-      <File FileName="ServidorUsuarios/Program.cs" Line="33" Column="64" />
+      <File FileName="ServidorUsuarios/Program.cs" Line="5" Column="8" />
       <File FileName="ServidorUsuarios/Servidor.cs" Line="119" Column="2" />
       <File FileName="ServidorUsuarios/grpc/ServidorUsuarios.cs" Line="1" Column="1" />
+      <File FileName="ServidorUsuarios/Config/Info.json" Line="4" Column="22" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

@@ -91,6 +91,35 @@ func TestIncluirUsuario(t *testing.T){
 	t.Log(resp.Message);
 }
 
+//Editar um registro
+func TestEditarUsuario(t *testing.T){
+	conn, err := grpc.Dial(mserv.Host + ":" + fmt.Sprintf("%d", mserv.Porta), grpc.WithInsecure())
+
+	if err != nil {
+		t.Errorf("Falha ao conectar %v", err)
+	}
+
+	defer conn.Close()
+
+	//--------EDITANDO USUARIO---------//
+	client := ServidorUsuarios.NewUsuariosClient(conn)
+
+	reg := &ServidorUsuarios.RegistroUsuario{}
+	reg.Id = 3
+	reg.Login = "pedrohtu"
+	reg.Senha = "1234"
+
+	resp, err := client.Salvar(context.Background(), reg)
+
+	if err != nil {
+		t.Errorf("Falha ao chamar servico de salvar %v", err)
+	}
+
+	if resp.Error != 0 {
+		t.Errorf("Falha ao salvar registro! " + resp.Message)
+	}
+}
+
 //Testar obter todos os registros de usuarios e exibir
 func TestBuscarTodosUsuarios(t *testing.T){
 	conn, err := grpc.Dial(mserv.Host + ":" + fmt.Sprintf("%d", mserv.Porta), grpc.WithInsecure())

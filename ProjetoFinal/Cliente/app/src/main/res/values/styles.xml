@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="CrocanbelaTheme" parent="AppTheme" >
+    <style name="CrocanbelaTheme" parent="AppTheme">
         <item name="colorPrimary">@color/color_crocanbela_main</item>
         <item name="colorPrimaryDark">@color/color_crocanbela_main</item>
     </style>
