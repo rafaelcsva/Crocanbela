@@ -16,18 +16,6 @@ message ClienteResponse{
     int32 error = 3;
 }
 
-message ModoBusca{
-    enum Modo{
-        NOME = 0;
-        ID = 1;
-        TODOS = 2;
-    }
-
-    Modo tipo  = 1;
-    int32 id = 2;
-    string nome = 3;
-}
-
 message Resultado{
     repeated RegistroCliente clientes = 1;
     ClienteResponse message = 2;

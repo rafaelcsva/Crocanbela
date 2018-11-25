@@ -1,11 +1,13 @@
 package crocanbela.crocanbela;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -20,9 +22,10 @@ import ServidorUsuarios.UsuariosGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
-public class TelaUsuario extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class TelaUsuario extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener{
     ListView listaUsuarios;
     Common a = new Common();
+    FloatingActionButton btNovo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class TelaUsuario extends AppCompatActivity implements AdapterView.OnItem
         try {
             List<Usuario> usuarios = obterUsuarios();
 
+            btNovo = (FloatingActionButton) findViewById(R.id.btNovo);
             listaUsuarios = (ListView) findViewById(R.id.listUsuarios);
             ArrayAdapter<Usuario> adapter = new ArrayAdapter<Usuario>(
                     this, android.R.layout.simple_list_item_1, usuarios
@@ -39,9 +43,29 @@ public class TelaUsuario extends AppCompatActivity implements AdapterView.OnItem
 
             listaUsuarios.setAdapter(adapter);
             listaUsuarios.setOnItemClickListener(this);
+
+            btNovo.setOnClickListener(this);
         }catch (Exception e){
             System.out.println("Falha ao iniciar!\n" + e.getMessage());
         }
+    }
+
+    public void onClick(View v){
+        final Globals gb = (Globals) getApplication();
+        final TelaUsuario ctxUsuario = this;
+
+        new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        gb.curUser = new Usuario(User.RegistroUsuario.newBuilder().build());
+                        gb.curUserA = false;
+
+                        Intent telaUser = new Intent(ctxUsuario, UsuarioEdit.class);
+                        startActivity(telaUser);
+                    }
+                }
+        ).start();
     }
 
     public void onItemClick(AdapterView<?> parent, View view, final int position,
@@ -55,27 +79,22 @@ public class TelaUsuario extends AppCompatActivity implements AdapterView.OnItem
                     public void run() {
                         Usuario user = (Usuario)listaUsuarios.getAdapter().getItem(position);
 
-                        try{
-                            gb.curUser = user;
-                            gb.curUserA = true;
-                        }catch (Exception e){
-                            return;
-                        }
+                        gb.curUser = user;
+                        gb.curUserA = true;
 
                         Intent telaUser = new Intent(ctxUsuario, UsuarioEdit.class);
                         startActivity(telaUser);
                     }
                 }
         ).start();
-
-
-
     }
 
     public ArrayList<Usuario> obterUsuarios() throws Exception {
+        Globals gb = (Globals) getApplication();
         ArrayList<Usuario> list = new ArrayList<Usuario>();
-        String hostNome = "192.168.25.10";
-        int portNome = 1808;
+
+        String hostNome = gb.hostNome;
+        int portNome = gb.portNome;
 
         try{
             ManagedChannel mChannel = ManagedChannelBuilder.forAddress(hostNome, portNome)

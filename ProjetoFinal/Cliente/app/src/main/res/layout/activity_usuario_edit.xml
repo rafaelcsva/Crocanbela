@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="senha"
-            android:inputType="numberPassword" />
+            android:inputType="text|numberPassword" />
 
         <Button
             android:id="@+id/btSalvar"
@@ -41,6 +41,14 @@
             android:layout_height="wrap_content"
             android:background="@color/color_crocanbela_main"
             android:text="Salvar"
+            android:textColor="@android:color/background_light" />
+
+        <Button
+            android:id="@+id/btExcluirUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_dark"
+            android:text="Excluir"
             android:textColor="@android:color/background_light" />
 
         <ProgressBar

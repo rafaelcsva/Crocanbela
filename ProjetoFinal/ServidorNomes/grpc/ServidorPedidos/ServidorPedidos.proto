@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package ServidorPedidos;
+
+message ProdutoItem{
+    int32 idProduto = 1;
+    int32 qtd = 2;
+    double valor = 3;
+    string nome = 4;
+}
+
+message RegistroPedido{
+    int32 id = 1;
+    string dataEntrada = 2;
+    string dataEntrega = 3;
+    string endereco = 4;
+    string telefone = 5;
+    string email = 6;
+    string observacao = 7;
+    string cliente = 8;
+    repeated ProdutoItem itens = 9;
+}
+
+message PedidoResponse{
+    RegistroPedido pedido = 1;
+    string message = 2;
+    int32 error = 3;
+}
+
+message ModoBusca{
+    enum Modo{
+        NOME = 0;
+        ID = 1;
+        TODOS = 2;
+    }
+
+    Modo tipo  = 1;
+    int32 id = 2;
+    string nome = 3;
+}
+
+message Resultado{
+    repeated RegistroPedido pedidos = 1;
+    PedidoResponse response = 2;
+}
+
+service Pedidos{
+    rpc Salvar(RegistroPedido) returns (PedidoResponse){}
+    rpc Buscar(ModoBusca) returns (Resultado){}
+    rpc Excluir(RegistroPedido) returns (PedidoResponse){}
+}

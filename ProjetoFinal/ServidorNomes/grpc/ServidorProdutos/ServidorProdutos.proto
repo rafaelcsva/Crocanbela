@@ -1,0 +1,39 @@
+﻿syntax = "proto3";
+
+package ServidorProdutos;
+
+message RegistroProduto{
+    int32 id = 1;
+    string nome = 2;
+    double precoUnidade = 3;
+    string dataCadastro = 4;
+}
+
+message ProdutoResponse{
+    string message = 1;
+    RegistroProduto rprodutor = 2;
+    int32 error = 3;
+}
+
+message ModoBusca{
+    enum Modo{
+        NOME = 0;
+        ID = 1;
+        TODOS = 2;
+    }
+
+    Modo tipo  = 1;
+    int32 id = 2;
+    string nome = 3;
+}
+
+message Resultado{
+    repeated RegistroProduto produtos = 1;
+    ProdutoResponse response = 2;
+}
+
+service Produtos{
+    rpc Salvar(RegistroProduto) returns (ProdutoResponse){}
+    rpc Buscar(ModoBusca) returns (Resultado){}
+    rpc Excluir(RegistroProduto) returns (ProdutoResponse){}
+}

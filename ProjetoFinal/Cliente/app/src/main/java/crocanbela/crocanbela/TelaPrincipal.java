@@ -14,13 +14,25 @@ public class TelaPrincipal extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_tela_principal);
 
         Button btUsuario = (Button) findViewById(R.id.btUsuario);
+        Button btCliente = (Button) findViewById(R.id.btCliente);
+
         btUsuario.setOnClickListener(this);
+        btCliente.setOnClickListener(this);
     }
 
     public void onClick(View v){
-        Intent telaUsuario = new Intent(this, TelaUsuario.class);
-        System.out.println("tentando abrir tela!");
 
-        startActivity(telaUsuario);
+        if(v.getId() == R.id.btUsuario){
+            Intent telaUsuario = new Intent(this, TelaUsuario.class);
+            System.out.println("tentando abrir tela!");
+
+            startActivity(telaUsuario);
+        }else if(v.getId() == R.id.btCliente){
+            Intent telaCliente = new Intent(this, TelaCliente.class);
+            System.out.println("tentando abrir tela!");
+
+            startActivity(telaCliente);
+        }
+
     }
 }

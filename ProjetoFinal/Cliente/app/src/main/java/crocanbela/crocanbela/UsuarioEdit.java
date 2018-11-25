@@ -45,12 +45,23 @@ public class UsuarioEdit extends AppCompatActivity implements View.OnClickListen
         btSalvar.setOnClickListener(this);
     }
 
+    @Override
     public void onClick(View v){
         final Globals gb = (Globals)getApplication();
         final String hostNome = gb.hostNome;
         final int portNome = gb.portNome;
         final TextView log = txtLogin;
         final TextView sen = txtSenha;
+        final String act1, act2;
+
+        if(v.getId() == R.id.btExcluirUsuario){
+            act1 = "Excluir";
+            act2 = "Excluindo";
+        }else{
+            act1 = "Salvar";
+            act2 = "Salvando";
+        }
+
         System.out.println("clickado!");
         progress.setVisibility(View.VISIBLE);
         txtProgress.setVisibility(View.VISIBLE);
@@ -87,7 +98,7 @@ public class UsuarioEdit extends AppCompatActivity implements View.OnClickListen
                             mChannel = ManagedChannelBuilder.forAddress(reg.getServico().getHost(),
                                     reg.getServico().getPorta()).usePlaintext(true).build();
 
-                            a.AtualizarProgress("Salvando", false, false, progress,
+                            a.AtualizarProgress(act2, false, false, progress,
                                     txtProgress);
 
                             UsuariosGrpc.UsuariosBlockingStub blockStubUser =
@@ -99,26 +110,41 @@ public class UsuarioEdit extends AppCompatActivity implements View.OnClickListen
                                     .setId(gb.curUser.id)
                                     .build();
 
-                            User.UsuarioResponse resp = blockStubUser.salvar(user);
+                            if(act1 == "Salvar") {
+                                User.UsuarioResponse resp = blockStubUser.salvar(user);
 
-                            if (resp.getError() != 0) {
-                                throw new Exception(resp.getMessage());
+                                if (resp.getError() != 0) {
+                                    throw new Exception(resp.getMessage());
+                                }
+
+                                a.AtualizarProgress("Salvo com sucesso!", false, true, progress
+                                        , txtProgress);
+
+                                System.out.println(resp.getMessage());
+                                System.out.println(resp.getRusuario().getId());
+                                System.out.println(resp.getRusuario().getLogin());
+                                System.out.println(resp.getRusuario().getSenha());
+
+                                if (gb.curUser.id == 0) {
+                                    gb.curUser.id = resp.getRusuario().getId();
+                                }
+                            }else{
+                                User.UsuarioResponse resp = blockStubUser.excluir(user);
+
+                                if(resp.getError() != 0){
+                                    throw new Exception(resp.getMessage());
+                                }
+
+                                a.AtualizarProgress("Excluido com sucesso!", false, true, progress
+                                        , txtProgress);
+
+                                gb.curUser = new Usuario(User.RegistroUsuario.newBuilder().build());
+
+                                txtLogin.setText("");
+                                txtSenha.setText("");
                             }
-
-                            a.AtualizarProgress("Salvo com sucesso!", false, true, progress
-                                    , txtProgress);
-
-                            System.out.println(resp.getMessage());
-                            System.out.println(resp.getRusuario().getId());
-                            System.out.println(resp.getRusuario().getLogin());
-                            System.out.println(resp.getRusuario().getSenha());
-
-                            if(gb.curUser.id == 0){
-                                gb.curUser.id = resp.getRusuario().getId();
-                            }
-
                         } catch (Exception e) {
-                            a.AtualizarProgress("Falha ao salvar.\n" +
+                            a.AtualizarProgress("Falha ao " + act1 + "\n" +
                                     e.getMessage(), true, false, progress, txtProgress);
                             return;
                         }

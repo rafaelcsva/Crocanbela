@@ -40,7 +40,7 @@ namespace ServidorClientes.Modelo
             }
             catch (MySqlException e)
             {
-                throw new Exception("Falha ao conectar ao banco.\n" + e.Message);
+                throw new Exception("Falha ao conectar ao banco.\n" + e.Message + connectionStringBuilder.Server);
             }
         }
 

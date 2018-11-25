@@ -17,7 +17,7 @@ func Criar()(server, error){
 	s := server{}
 	s.list = make(map[string][]ServidorNomes.RegistroServico)
 	s.mutex = make(map[string]*sync.Mutex)
-	s.servicosOferecidos = []string{"Autenticacao", "Cliente", "Usuario"}
+	s.servicosOferecidos = []string{"Autenticacao", "Cliente", "Usuario", "Produto", "Pedido"}
 
 	for i := 0 ; i < len(s.servicosOferecidos) ; i++ {
 		s.mutex[s.servicosOferecidos[i]] = &sync.Mutex{}
@@ -52,7 +52,7 @@ func (s *server) Cadastrar(ctx context.Context, in *ServidorNomes.RegistroServic
 	s.list[in.Servico] = append(s.list[in.Servico], *in)
 	s.mutex[in.Servico].Unlock()
 
-	response.Message = "Servido de " + in.Servico + " cadastrado com sucesso!"
+	response.Message = "Servidor de " + in.Servico + " cadastrado com sucesso!"
 	
 	return &response, nil
 }

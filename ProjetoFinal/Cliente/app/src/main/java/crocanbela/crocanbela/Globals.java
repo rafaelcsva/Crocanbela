@@ -12,6 +12,8 @@ public class Globals extends Application{
     public User.RegistroUsuario usuarioLogado;
     public Usuario curUser;
     public Boolean curUserA;
+    public Cliente curClient;
+    public Boolean curClientA;
     public String hostNome = "192.168.25.10";
     public int portNome = 1808;
 }

@@ -146,8 +146,8 @@ namespace ServidorClientes.Modelo
                 {
                     try
                     {
-                        BancoDeDados.executar("update clientes set nome=?param1,telefone=?param2,email=?param3,dataCadastro=?param4 where id = ?param5", 
-						                      new object[] { a.Nome, a.Telefone, a.Email, a.dataCadastro, a.Id });
+                        BancoDeDados.executar("update clientes set nome=?param1,telefone=?param2,email=?param3 where id = ?param4", 
+						                      new object[] { a.Nome, a.Telefone, a.Email, a.Id });
                     }
                     catch (Exception e)
                     {
