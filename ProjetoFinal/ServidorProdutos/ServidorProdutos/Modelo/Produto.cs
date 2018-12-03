@@ -140,8 +140,8 @@ namespace ServidorProdutos.Modelo
 			{
 				try
 				{
-					BancoDeDados.executar("update produtos set nome=?param1,precoUnidade=?param2,dataCadastro=?param3 where id=?param4",
-										  new object[] { b.nome, b.precoUnitario, b.dataCadastro, b.id });
+					BancoDeDados.executar("update produtos set nome=?param1,precoUnidade=?param2 where id=?param3",
+										  new object[] { b.nome, b.precoUnitario, b.id });
 				}
 				catch (Exception ex)
 				{

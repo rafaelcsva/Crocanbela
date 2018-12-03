@@ -1,14 +1,14 @@
 ﻿<Properties StartupConfiguration="{8FDD8883-21AA-4C0C-AF75-3F3954213042}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ServidorPedidos/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ServidorPedidos/Modelo/ProdutoItem.cs">
     <Files>
-      <File FileName="ServidorPedidos/Program.cs" Line="29" Column="6" />
-      <File FileName="ServidorPedidos/Servidor.cs" Line="14" Column="52" />
-      <File FileName="ServidorPedidos/Modelo/ProdutoItem.cs" Line="45" Column="4" />
+      <File FileName="ServidorPedidos/Program.cs" Line="28" Column="20" />
+      <File FileName="ServidorPedidos/Servidor.cs" Line="20" Column="6" />
+      <File FileName="ServidorPedidos/Modelo/ProdutoItem.cs" Line="53" Column="30" />
       <File FileName="ServidorPedidos/Modelo/Produto.cs" Line="28" Column="3" />
       <File FileName="ServidorPedidos/Modelo/BancoDeDados.cs" Line="23" Column="52" />
-      <File FileName="ServidorPedidos/Modelo/Pedido.cs" Line="36" Column="51" />
-      <File FileName="ServidorPedidos/grpc/ServidorPedidos.proto" Line="9" Column="21" />
-      <File FileName="ServidorPedidos/Config/Config.json" Line="1" Column="1" />
+      <File FileName="ServidorPedidos/Modelo/Pedido.cs" Line="55" Column="5" />
+      <File FileName="ServidorPedidos/grpc/ServidorPedidos.proto" Line="51" Column="2" />
+      <File FileName="ServidorPedidos/Config/Info.json" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -17,5 +17,5 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.ServidorPedidos PreferredExecutionTarget="MonoDevelop.Default" FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.ServidorPedidos PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>

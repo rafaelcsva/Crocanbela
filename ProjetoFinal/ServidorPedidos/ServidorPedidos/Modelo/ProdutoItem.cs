@@ -49,7 +49,7 @@ namespace ServidorPedidos.Modelo
 		public ProdutoItem(ServidorPedidos.ProdutoItem prodItem){
 			this.idProduto = prodItem.IdProduto;
 			this.Qtd = prodItem.Qtd;
-			this.Valor = Convert.ToDecimal(Valor);
+			this.Valor = Convert.ToDecimal(prodItem.Valor);
 			this.Nome = prodItem.Nome;
 		}
 

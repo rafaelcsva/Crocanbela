@@ -14,6 +14,10 @@ public class Globals extends Application{
     public Boolean curUserA;
     public Cliente curClient;
     public Boolean curClientA;
-    public String hostNome = "192.168.25.10";
+    public Produto curProduto;
+    public Boolean curProdutoA;
+    public Pedido curPedido;
+    public Boolean curPedidoA;
+    public String hostNome = "192.168.0.24";
     public int portNome = 1808;
 }

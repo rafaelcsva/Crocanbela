@@ -22,6 +22,7 @@ import io.grpc.ManagedChannelBuilder;
 public class TelaCliente extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
     ListView listaClientes;
     FloatingActionButton ftBt;
+    Common a = new Common();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class TelaCliente extends AppCompatActivity implements AdapterView.OnItem
         setContentView(R.layout.activity_tela_cliente2);
 
         try{
-            List<Cliente> clientes = obterClientes();
+            List<Cliente> clientes = a.obterClientes((Globals) getApplication());
 
             listaClientes = findViewById(R.id.listClientes);
             ftBt = (FloatingActionButton) findViewById(R.id.btNovoCliente);
@@ -89,56 +90,5 @@ public class TelaCliente extends AppCompatActivity implements AdapterView.OnItem
         ).start();
     }
 
-    public List<Cliente> obterClientes() throws Exception{
-        Globals gb = (Globals) getApplication();
-        ArrayList<Cliente> list = new ArrayList<Cliente>();
 
-        String hostNome = gb.hostNome;
-        int portNome = gb.portNome;
-
-        try{
-            ManagedChannel mChannel = ManagedChannelBuilder.forAddress(hostNome, portNome)
-                    .usePlaintext(true).build();
-
-            NomesGrpc.NomesBlockingStub blockStub = NomesGrpc.newBlockingStub(mChannel);
-
-            Names.ServicoRequest req = Names.ServicoRequest.newBuilder()
-                    .setServico("Cliente").build();
-
-            Names.ServicoResponse reg = blockStub.obterServico(req);
-
-            if (reg.getError() != 0) {
-                throw new Exception(reg.getMessage());
-            }
-
-            System.out.println(reg.getServico().getHost());
-            System.out.println(reg.getServico().getPorta());
-
-            mChannel = ManagedChannelBuilder.forAddress(reg.getServico().getHost(),
-                    reg.getServico().getPorta()).usePlaintext(true).build();
-
-            ClientesGrpc.ClientesBlockingStub blockStubCliente = ClientesGrpc.newBlockingStub(mChannel);
-            Client.ModoBusca mod = Client.ModoBusca.newBuilder()
-                    .setTipo(Client.ModoBusca.Modo.TODOS).build();
-
-            System.out.println("buscando...");
-
-            Client.Resultado resultado = blockStubCliente.buscar(mod);
-
-            if(resultado.getMessage().getError() != 0){
-                throw new Exception(resultado.getMessage().getMessage());
-            }
-
-            System.out.println("Achei " + resultado.getClientesCount() + " clientes");
-
-            for(int i = 0 ; i < resultado.getClientesCount() ; i++){
-                list.add(new Cliente(resultado.getClientes(i)));
-            }
-
-        }catch (Exception e){
-            throw new Exception("Falha ao obter Clientes!\n" + e.getMessage());
-        }
-
-        return list;
-    }
 }

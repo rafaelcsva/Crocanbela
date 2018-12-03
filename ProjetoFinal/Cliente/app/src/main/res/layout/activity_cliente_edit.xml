@@ -52,7 +52,7 @@
             android:id="@+id/btSalvarCliente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_crocanbela_main"
+            android:background="@android:color/holo_green_dark"
             android:text="Salvar"
             android:textColor="@android:color/background_light" />
 
@@ -60,7 +60,7 @@
             android:id="@+id/btExcluirClient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_orange_dark"
+            android:background="@color/ic_crocanbelab_cliente"
             android:text="Excluir"
             android:textColor="@android:color/background_light" />
 

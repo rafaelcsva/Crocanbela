@@ -23,6 +23,6 @@ class Cliente {
 
     @Override
     public String toString(){
-        return "ID: " + this.id + " Nome: " + this.nome + " Telefone: " + this.telefone;
+        return this.nome;
     }
 }

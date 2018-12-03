@@ -7,11 +7,17 @@
     tools:context="crocanbela.crocanbela.TelaPrincipal">
 
     <LinearLayout
-        android:layout_width="395dp"
-        android:layout_height="587dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/btUsuario"
@@ -19,10 +25,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:width="0dp"
-            android:background="@mipmap/ic_launcher"
+            android:background="@mipmap/ic_usuariop"
             android:fontFamily="sans-serif-condensed"
             android:text="Usuários"
-            android:textColor="@android:color/holo_green_dark"
+            android:textColor="@android:color/background_light"
             android:textSize="36sp" />
 
         <Button
@@ -30,10 +36,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@mipmap/ic_croncanbela_cliente"
+            android:background="@mipmap/ic_launcher_crocanbela_cliente"
             android:fontFamily="sans-serif-condensed"
             android:text="Clientes"
             android:textColor="@android:color/holo_red_light"
+            android:textSize="36sp" />
+
+        <Button
+            android:id="@+id/btProduto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@mipmap/ic_crocanbelaf_produtop"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Produtos"
+            android:textColor="?attr/colorAccent"
+            android:textSize="36sp" />
+
+        <Button
+            android:id="@+id/btPedido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@mipmap/ic_crocanbela_pedidofore"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Pedidos"
+            android:textColor="@android:color/black"
             android:textSize="36sp" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

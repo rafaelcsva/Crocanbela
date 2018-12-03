@@ -72,6 +72,7 @@ namespace ServidorPedidos.Modelo
         public static void preencherValores(Pedido pedido, DataRow row)
         {
             pedido.Id = (int)row["id"];
+            pedido.Cliente = row["cliente"].ToString();
 			pedido.DataEntrada = row["dataEntrada"].ToString();
 			pedido.DataEntrega = row["dataEntrega"].ToString();
 
@@ -155,17 +156,20 @@ namespace ServidorPedidos.Modelo
             {
                 if (pedido.Id == 0)
                 {
-					pedido.Id = (int)BancoDeDados.executar("insert into pedidos(dataEntrada,dataEntrega,endereco,telefone,email,observacao, cliente)" +
+					pedido.DataEntrada = DateTime.Now.ToString();
+
+                    pedido.Id = (int)BancoDeDados.executar("insert into pedidos(dataEntrada,dataEntrega,endereco,telefone,email,observacao, cliente)" +
 					                                       " values(?param1, ?param2, ?param3, ?param4, ?param5, ?param6, ?param7)",
 														   new object[] {pedido.DataEntrada, pedido.DataEntrega, pedido.Endereco, pedido.Telefone, pedido.Email,
 						                                    pedido.Observacao, pedido.Cliente});
 
+                    
                 }
                 else
                 {
-                    BancoDeDados.executar("update pedidos SET dataEntrada=?param1, dataEntrega=?param2, endereco=?param3, telefone=?param4, " +
-					                      "email=?param5, observacao=?param6 where id = ?param7", 
-					                      new object[] { pedido.DataEntrada, pedido.DataEntrega, pedido.Endereco, pedido.Telefone, pedido.Email, pedido.Observacao, pedido.Id });
+                    BancoDeDados.executar("update pedidos SET dataEntrega=?param1, endereco=?param2, telefone=?param3, " +
+					                      "email=?param4, observacao=?param5 where id = ?param6", 
+					                      new object[] { pedido.DataEntrega, pedido.Endereco, pedido.Telefone, pedido.Email, pedido.Observacao, pedido.Id });
                     BancoDeDados.executar("delete from produtositens where idPedido = ?param1", new object[] { pedido.Id });
                 }
 					                                       
