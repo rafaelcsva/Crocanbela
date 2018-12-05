@@ -10,8 +10,13 @@ import(
 	"time"
 )
 
+type ServicoNode struct{
+	servico ServidorNomes.RegistroServico
+	ultimaAtualizacao time.Time
+}
+
 type server struct{
-	list map[string][]ServidorNomes.RegistroServico
+	list map[string][]ServicoNode
 	mutex map[string]*sync.Mutex
 	servicosOferecidos []string
 	pesoCpu map[string]int32
@@ -20,7 +25,7 @@ type server struct{
 
 func Criar(pesosCpu []int32, pesosMem []int32)(server, error){
 	s := server{}
-	s.list = make(map[string][]ServidorNomes.RegistroServico)
+	s.list = make(map[string][]ServicoNode)
 	s.pesoCpu = make(map[string]int32)
 	s.pesoMem = make(map[string]int32)
 
@@ -54,8 +59,9 @@ func (s *server) AtualizarEstado(ctx context.Context, in *ServidorNomes.Registro
 
 	s.mutex[in.Servico].Lock()
 	for _, v := range s.list[in.Servico] {
-		if(v.Host == in.Host){
-			v.Estado = in.Estado
+		if(v.servico.Host == in.Host){
+			v.servico.Estado = in.Estado
+			v.ultimaAtualizacao = time.Now()
 		}
 	}
 	s.mutex[in.Servico].Unlock()
@@ -78,7 +84,10 @@ func (s *server) Cadastrar(ctx context.Context, in *ServidorNomes.RegistroServic
 	}
 
 	s.mutex[in.Servico].Lock()
-	s.list[in.Servico] = append(s.list[in.Servico], *in)
+	var a ServicoNode
+	a.servico = *in
+	a.ultimaAtualizacao = time.Now()
+	s.list[in.Servico] = append(s.list[in.Servico], a)
 	s.mutex[in.Servico].Unlock()
 
 	response.Message = "Servidor de " + in.Servico + " cadastrado com sucesso!"
@@ -88,13 +97,19 @@ func (s *server) Cadastrar(ctx context.Context, in *ServidorNomes.RegistroServic
 
 const(
 	port = 1808
-	host = "192.168.0.24"
+	host = "192.168.0.27"
 	off_set = 10
+	maximoTempoAtualizacao = 1000000000 * 30
 )
 
-func Ativo(in ServidorNomes.RegistroServico, s *server) bool {
-	
-	conn, err := net.Dial("udp", fmt.Sprintf("%s:%d", in.Host, in.Porta))
+func Ativo(in *ServicoNode, s *server) bool {
+	diff := time.Now().Sub(in.ultimaAtualizacao)
+
+	if(diff < maximoTempoAtualizacao){
+		return true
+	}
+
+	conn, err := net.Dial("udp", fmt.Sprintf("%s:%d", in.servico.Host, in.servico.Porta))
 	conn1, err1 := net.ListenPacket("udp", fmt.Sprintf("%s:%d", host, port))
 	tolerancia := time.Second * 5
 
@@ -111,7 +126,7 @@ func Ativo(in ServidorNomes.RegistroServico, s *server) bool {
 	defer conn.Close()
 	defer conn1.Close()
 
-	log.Printf("Mandando teste de conexao para " + in.Host)
+	log.Printf("Mandando teste de conexao para " + in.servico.Host)
 	conn.Write([]byte("Teste"))
 
 	buffer := make([]byte, 1024)
@@ -124,13 +139,15 @@ func Ativo(in ServidorNomes.RegistroServico, s *server) bool {
 		return false
 	}
 
+	in.ultimaAtualizacao = time.Now()
+
 	return true
 }
 
 func ObterMelhor(s *server, servico string, in *ServidorNomes.ServicoResponse) bool{
 	pa := s.pesoCpu[servico]
 	pb := s.pesoMem[servico]
-	tmp := make([]ServidorNomes.RegistroServico, 0)
+	tmp := make([]ServicoNode, 0)
 
 	find := false
 	var best int32 = 1e9
@@ -138,9 +155,9 @@ func ObterMelhor(s *server, servico string, in *ServidorNomes.ServicoResponse) b
 	s.mutex[servico].Lock()
 
 	for _, v := range s.list[servico] {
-		val := pa * v.Estado.Cpu + pb * v.Estado.Memoria
+		val := pa * v.servico.Estado.Cpu + pb * v.servico.Estado.Memoria
 		
-		if(!Ativo(v, s)){
+		if(!Ativo(&v, s)){
 			log.Printf("Servico de " + servico + " perdido")
 			continue
 		}
@@ -150,7 +167,7 @@ func ObterMelhor(s *server, servico string, in *ServidorNomes.ServicoResponse) b
 		if(val < best){
 			find = true
 			best = val
-			in.Servico = &v
+			in.Servico = &(v.servico)
 		}
 	}
 
