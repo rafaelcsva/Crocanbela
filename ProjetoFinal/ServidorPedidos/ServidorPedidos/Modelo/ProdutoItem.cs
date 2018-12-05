@@ -40,6 +40,7 @@ namespace ServidorPedidos.Modelo
         {
 			n.Qtd = Convert.ToInt32(row["quantidade"]);
 			n.Valor = Convert.ToDecimal(row["valor"]);
+            n.idProduto = (int)row["idProduto"];
         }
 
 		public ProdutoItem(){
@@ -86,6 +87,10 @@ namespace ServidorPedidos.Modelo
                 try
                 {
                     n.Produto = Produto.BuscarPorId((int)row["idProduto"]);
+                    if((int) row["idProduto"] == 0){
+                        throw new Exception("Valor de idProduto nao pode ser zero");
+                    }
+
 					n.Nome = n.Produto.nome;
                 }
                 catch (Exception e)

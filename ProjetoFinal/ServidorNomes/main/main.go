@@ -20,7 +20,10 @@ func main(){
 		log.Fatal(err)
 	}
 	
-	s, err := server.Criar()
+	pesoCpu := []int32{3, 4, 2, 1, 6}
+	pesoMem := []int32{2, 1, 4, 3, 4}
+	s, err := server.Criar(pesoCpu, pesoMem)
+
 	grpcServer := grpc.NewServer()
 	ServidorNomes.RegisterNomesServer(grpcServer, &s)
 	

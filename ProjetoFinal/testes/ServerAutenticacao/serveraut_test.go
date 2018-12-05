@@ -59,8 +59,8 @@ func TestAutenticacaoValido(t *testing.T){
 	client := ServidorAutenticacao.NewAutenticacaoClient(conn)
 
 	reg := &ServidorUsuarios.RegistroUsuario{}
-	reg.Login = "joaoneves"
-	reg.Senha = "7894"
+	reg.Login = "pedrohtu"
+	reg.Senha = "1234"
 
 	resp, err := client.Autenticar(context.Background(), reg)
 

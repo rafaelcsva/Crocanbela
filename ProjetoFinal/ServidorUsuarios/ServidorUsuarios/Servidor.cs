@@ -2,11 +2,68 @@
 using Grpc.Core;
 using System.Threading.Tasks;
 using ServidorUsuarios.Modelo;
+using ServidorNomes;
+using System.IO;
+using Newtonsoft.Json.Linq;
+using System.Threading;
 
 namespace ServidorUsuarios
 {
 	public class Servidor : Usuarios.UsuariosBase
 	{
+		private static Mutex mt = new Mutex();
+		DateTime ultimaAtualizacao = DateTime.Now;
+		const int maximoTempo = 30;
+
+		public void AtualizarServidor(){
+			try
+			{
+				mt.WaitOne();
+				int diff = Convert.ToInt32(DateTime.Now.Subtract(ultimaAtualizacao).TotalSeconds);
+
+				if (diff < maximoTempo)
+				{
+					mt.ReleaseMutex();
+					return;
+				}
+                
+				var file = File.ReadAllText("./Config/Info.json");
+				var conf = JObject.Parse(file);
+
+				var hostNome = conf["nomes"]["host"].ToString();
+				var portNome = conf["nomes"]["porta"].ToString();
+				var hostUser = conf["usuarios"]["host"].ToString();
+                var portaUser = Int32.Parse(conf["usuarios"]["porta"].ToString());
+
+				Channel channel = new Channel(hostNome + ":" + portNome, ChannelCredentials.Insecure);
+
+				var client = new Nomes.NomesClient(channel);
+
+				RegistroServico registro = new RegistroServico();
+				registro.Host = hostUser;
+				registro.Porta = portaUser;
+				registro.Servico = "Usuario";
+
+				registro.Estado = new Estado();
+				registro.Estado.Cpu = Diagnostico.ObterUsoCpu();
+				registro.Estado.Memoria = Diagnostico.ObterUsoMemoria();
+
+				var resp = client.AtualizarEstado(registro);
+
+                if (resp.Error != 0)
+                {
+                    throw new Exception(resp.Message);
+                }
+
+			}catch(Exception e){
+				mt.ReleaseMutex();
+				throw new Exception("Falha ao atualizar dados do servidor!\n" + e.Message);
+			}
+
+			ultimaAtualizacao = DateTime.Now;
+			mt.ReleaseMutex();
+		}
+
 		public override Task<UsuarioResponse> Salvar(RegistroUsuario rusuario, ServerCallContext context)
 		{
 			return Task.Run(() =>
@@ -14,9 +71,10 @@ namespace ServidorUsuarios
 				var usuario = new Usuario(rusuario);
 				var response = new UsuarioResponse();
 				response.Error = 0;
-
+                
 				try
 				{
+					AtualizarServidor();
 					Usuario.Salvar(usuario);
 				}
 				catch (Exception e)
@@ -45,6 +103,7 @@ namespace ServidorUsuarios
 
 				try
 				{
+					AtualizarServidor();
 					Usuario.Excluir(usuario);
 				}
 				catch (Exception e)
@@ -69,6 +128,8 @@ namespace ServidorUsuarios
 
 				try
 				{
+					AtualizarServidor();
+
 					if (modo.Tipo == ModoBusca.Types.Modo.Id)
 					{
 						var usuario = Usuario.BuscarPorId(modo.Id);

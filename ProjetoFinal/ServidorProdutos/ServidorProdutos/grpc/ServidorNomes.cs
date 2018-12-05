@@ -24,21 +24,26 @@ namespace ServidorNomes {
     static ServidorNomesReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChNTZXJ2aWRvck5vbWVzLnByb3RvEg1TZXJ2aWRvck5vbWVzIj8KD1JlZ2lz",
+            "ChNTZXJ2aWRvck5vbWVzLnByb3RvEg1TZXJ2aWRvck5vbWVzImYKD1JlZ2lz",
             "dHJvU2VydmljbxIMCgRob3N0GAEgASgJEg0KBXBvcnRhGAIgASgFEg8KB3Nl",
-            "cnZpY28YAyABKAkiYgoPU2Vydmljb1Jlc3BvbnNlEi8KB3NlcnZpY28YASAB",
-            "KAsyHi5TZXJ2aWRvck5vbWVzLlJlZ2lzdHJvU2VydmljbxIPCgdtZXNzYWdl",
-            "GAIgASgJEg0KBWVycm9yGAMgASgFIjcKCVJlbGF0b3JpbxIMCgRob3N0GAEg",
-            "ASgJEhwKFE51bWVyb0NvbmV4b2VzQXRpdmFzGAIgASgFIiEKDlNlcnZpY29S",
-            "ZXF1ZXN0Eg8KB3NlcnZpY28YASABKAkypwEKBU5vbWVzEk0KCUNhZGFzdHJh",
-            "chIeLlNlcnZpZG9yTm9tZXMuUmVnaXN0cm9TZXJ2aWNvGh4uU2Vydmlkb3JO",
-            "b21lcy5TZXJ2aWNvUmVzcG9uc2UiABJPCgxPYnRlclNlcnZpY28SHS5TZXJ2",
-            "aWRvck5vbWVzLlNlcnZpY29SZXF1ZXN0Gh4uU2Vydmlkb3JOb21lcy5TZXJ2",
-            "aWNvUmVzcG9uc2UiAGIGcHJvdG8z"));
+            "cnZpY28YAyABKAkSJQoGZXN0YWRvGAQgASgLMhUuU2Vydmlkb3JOb21lcy5F",
+            "c3RhZG8iJgoGRXN0YWRvEgsKA2NwdRgBIAEoBRIPCgdtZW1vcmlhGAIgASgF",
+            "ImIKD1NlcnZpY29SZXNwb25zZRIvCgdzZXJ2aWNvGAEgASgLMh4uU2Vydmlk",
+            "b3JOb21lcy5SZWdpc3Ryb1NlcnZpY28SDwoHbWVzc2FnZRgCIAEoCRINCgVl",
+            "cnJvchgDIAEoBSI3CglSZWxhdG9yaW8SDAoEaG9zdBgBIAEoCRIcChROdW1l",
+            "cm9Db25leG9lc0F0aXZhcxgCIAEoBSIhCg5TZXJ2aWNvUmVxdWVzdBIPCgdz",
+            "ZXJ2aWNvGAEgASgJMvwBCgVOb21lcxJNCglDYWRhc3RyYXISHi5TZXJ2aWRv",
+            "ck5vbWVzLlJlZ2lzdHJvU2VydmljbxoeLlNlcnZpZG9yTm9tZXMuU2Vydmlj",
+            "b1Jlc3BvbnNlIgASTwoMT2J0ZXJTZXJ2aWNvEh0uU2Vydmlkb3JOb21lcy5T",
+            "ZXJ2aWNvUmVxdWVzdBoeLlNlcnZpZG9yTm9tZXMuU2Vydmljb1Jlc3BvbnNl",
+            "IgASUwoPQXR1YWxpemFyRXN0YWRvEh4uU2Vydmlkb3JOb21lcy5SZWdpc3Ry",
+            "b1NlcnZpY28aHi5TZXJ2aWRvck5vbWVzLlNlcnZpY29SZXNwb25zZSIAYgZw",
+            "cm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::ServidorNomes.RegistroServico), global::ServidorNomes.RegistroServico.Parser, new[]{ "Host", "Porta", "Servico" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ServidorNomes.RegistroServico), global::ServidorNomes.RegistroServico.Parser, new[]{ "Host", "Porta", "Servico", "Estado" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ServidorNomes.Estado), global::ServidorNomes.Estado.Parser, new[]{ "Cpu", "Memoria" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ServidorNomes.ServicoResponse), global::ServidorNomes.ServicoResponse.Parser, new[]{ "Servico", "Message", "Error" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ServidorNomes.Relatorio), global::ServidorNomes.Relatorio.Parser, new[]{ "Host", "NumeroConexoesAtivas" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ServidorNomes.ServicoRequest), global::ServidorNomes.ServicoRequest.Parser, new[]{ "Servico" }, null, null, null)
@@ -76,6 +81,7 @@ namespace ServidorNomes {
       host_ = other.host_;
       porta_ = other.porta_;
       servico_ = other.servico_;
+      estado_ = other.estado_ != null ? other.estado_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -117,6 +123,17 @@ namespace ServidorNomes {
       }
     }
 
+    /// <summary>Field number for the "estado" field.</summary>
+    public const int EstadoFieldNumber = 4;
+    private global::ServidorNomes.Estado estado_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::ServidorNomes.Estado Estado {
+      get { return estado_; }
+      set {
+        estado_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as RegistroServico);
@@ -133,6 +150,7 @@ namespace ServidorNomes {
       if (Host != other.Host) return false;
       if (Porta != other.Porta) return false;
       if (Servico != other.Servico) return false;
+      if (!object.Equals(Estado, other.Estado)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -142,6 +160,7 @@ namespace ServidorNomes {
       if (Host.Length != 0) hash ^= Host.GetHashCode();
       if (Porta != 0) hash ^= Porta.GetHashCode();
       if (Servico.Length != 0) hash ^= Servico.GetHashCode();
+      if (estado_ != null) hash ^= Estado.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -167,6 +186,10 @@ namespace ServidorNomes {
         output.WriteRawTag(26);
         output.WriteString(Servico);
       }
+      if (estado_ != null) {
+        output.WriteRawTag(34);
+        output.WriteMessage(Estado);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -183,6 +206,9 @@ namespace ServidorNomes {
       }
       if (Servico.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Servico);
+      }
+      if (estado_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Estado);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -203,6 +229,12 @@ namespace ServidorNomes {
       }
       if (other.Servico.Length != 0) {
         Servico = other.Servico;
+      }
+      if (other.estado_ != null) {
+        if (estado_ == null) {
+          estado_ = new global::ServidorNomes.Estado();
+        }
+        Estado.MergeFrom(other.Estado);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -227,6 +259,170 @@ namespace ServidorNomes {
             Servico = input.ReadString();
             break;
           }
+          case 34: {
+            if (estado_ == null) {
+              estado_ = new global::ServidorNomes.Estado();
+            }
+            input.ReadMessage(estado_);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class Estado : pb::IMessage<Estado> {
+    private static readonly pb::MessageParser<Estado> _parser = new pb::MessageParser<Estado>(() => new Estado());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<Estado> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::ServidorNomes.ServidorNomesReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Estado() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Estado(Estado other) : this() {
+      cpu_ = other.cpu_;
+      memoria_ = other.memoria_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public Estado Clone() {
+      return new Estado(this);
+    }
+
+    /// <summary>Field number for the "cpu" field.</summary>
+    public const int CpuFieldNumber = 1;
+    private int cpu_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Cpu {
+      get { return cpu_; }
+      set {
+        cpu_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "memoria" field.</summary>
+    public const int MemoriaFieldNumber = 2;
+    private int memoria_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Memoria {
+      get { return memoria_; }
+      set {
+        memoria_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as Estado);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(Estado other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Cpu != other.Cpu) return false;
+      if (Memoria != other.Memoria) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Cpu != 0) hash ^= Cpu.GetHashCode();
+      if (Memoria != 0) hash ^= Memoria.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Cpu != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Cpu);
+      }
+      if (Memoria != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Memoria);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Cpu != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Cpu);
+      }
+      if (Memoria != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Memoria);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(Estado other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Cpu != 0) {
+        Cpu = other.Cpu;
+      }
+      if (other.Memoria != 0) {
+        Memoria = other.Memoria;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Cpu = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            Memoria = input.ReadInt32();
+            break;
+          }
         }
       }
     }
@@ -241,7 +437,7 @@ namespace ServidorNomes {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ServidorNomes.ServidorNomesReflection.Descriptor.MessageTypes[1]; }
+      get { return global::ServidorNomes.ServidorNomesReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -432,7 +628,7 @@ namespace ServidorNomes {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ServidorNomes.ServidorNomesReflection.Descriptor.MessageTypes[2]; }
+      get { return global::ServidorNomes.ServidorNomesReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -589,7 +785,7 @@ namespace ServidorNomes {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::ServidorNomes.ServidorNomesReflection.Descriptor.MessageTypes[3]; }
+      get { return global::ServidorNomes.ServidorNomesReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

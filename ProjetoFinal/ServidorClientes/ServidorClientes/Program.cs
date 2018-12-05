@@ -3,6 +3,10 @@ using System.IO;
 using ServidorNomes;
 using Grpc.Core;
 using Newtonsoft.Json.Linq;
+using System.Net.Sockets;
+using ServidorClientes.Modelo;
+using System.Net;
+using System.Text;
 
 namespace ServidorClientes
 {
@@ -37,8 +41,16 @@ namespace ServidorClientes
 
 				var client = new Nomes.NomesClient(channel);
 
-				var resp = client.Cadastrar(new RegistroServico { Host = conf["clientes"]["host"].ToString(), 
-					Porta = int.Parse(conf["clientes"]["porta"].ToString()), Servico = "Cliente" });
+				RegistroServico registro = new RegistroServico();
+				registro.Host = hostClient;
+				registro.Porta = portaClient;
+                registro.Servico = "Cliente";
+
+                registro.Estado = new Estado();
+                registro.Estado.Cpu = Diagnostico.ObterUsoCpu();
+                registro.Estado.Memoria = Diagnostico.ObterUsoMemoria();
+
+                var resp = client.Cadastrar(registro);
 
 				if (resp.Error != 0)
 				{
@@ -47,14 +59,25 @@ namespace ServidorClientes
 
 				Console.WriteLine(resp.Message);
 
-				var exitEvent = new System.Threading.ManualResetEvent(false);
+				Console.WriteLine("Levantando listener udp para aguardar conexoes de confirmacao de ativo");
+                Socket receiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                UdpClient listener = new UdpClient(portaClient);
+				IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, portaClient);
 
-				Console.CancelKeyPress += (sender, e) => exitEvent.Set();
+                while (true)
+                {
+                    Console.WriteLine("Tentando receber algo");
+                    byte[] x = listener.Receive(ref groupEP);
+                    Console.WriteLine("Recebi conexao!");
+                    string mess = Encoding.ASCII.GetString(x);
 
-				exitEvent.WaitOne();
+					IPAddress broadcast = IPAddress.Parse(hostNome);
 
-				server.ShutdownAsync().Wait();
+                    byte[] sendbuf = Encoding.ASCII.GetBytes("Servidor Ativo");
+                    IPEndPoint ep = new IPEndPoint(broadcast, Convert.ToInt32(portNome));
 
+                    receiver.SendTo(sendbuf, ep);
+                }            
 			}
 			catch (Exception e)
 			{

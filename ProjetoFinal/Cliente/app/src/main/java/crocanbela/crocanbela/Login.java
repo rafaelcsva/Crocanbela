@@ -58,17 +58,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
                             NomesGrpc.NomesBlockingStub blockStub = NomesGrpc.newBlockingStub(mChannel);
 
-                            System.out.println("Buscando servidor de autenticacao");
+                            System.out.println("Buscando servidor de autenticacao " + hostNome + " " + portNome);
                             a.AtualizarProgress("Buscando servidor de autenticacao",
                                     false, false, progress, txtProgress);
-                            System.out.println("Buscando servidor de autenticacao(terminado)");
 
                             Names.ServicoRequest req = Names.ServicoRequest.newBuilder()
                                     .setServico("Autenticacao").build();
-
+                            System.out.println("Buscando servidor de autenticacao(terminado1)");
                             Names.ServicoResponse reg = blockStub.obterServico(req);
 
                             if (reg.getError() != 0) {
+                                System.out.println("erro " + reg.getMessage());
                                 throw new Exception(reg.getMessage());
                             }
 
@@ -106,6 +106,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                             gb.usuarioLogado = resp.getRusuario();
 
                         } catch (Exception e) {
+                            System.out.println("Erro!\n");
+
                             a.AtualizarProgress("Falha ao autenticar.\n" +
                                     e.getMessage(), true, false, progress, txtProgress);
                             return;

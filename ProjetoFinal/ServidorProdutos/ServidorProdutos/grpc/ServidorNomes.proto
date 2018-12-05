@@ -6,6 +6,12 @@ message RegistroServico{
     string host = 1;
     int32 porta = 2;
     string servico = 3;
+    Estado estado = 4;
+}
+
+message Estado{
+    int32 cpu = 1;
+    int32 memoria = 2;
 }
 
 message ServicoResponse{
@@ -26,4 +32,5 @@ message ServicoRequest{
 service Nomes{
     rpc Cadastrar(RegistroServico) returns (ServicoResponse){}
     rpc ObterServico(ServicoRequest) returns (ServicoResponse){}
+    rpc AtualizarEstado(RegistroServico) returns (ServicoResponse){}
 }

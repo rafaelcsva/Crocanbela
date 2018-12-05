@@ -45,7 +45,7 @@ namespace ServidorPedidos.Modelo
 
 				if (rep.Error != 0)
 				{
-					throw new Exception("Falha ao obter produto!\n" + rep.Message);
+					throw new Exception("Falha ao obter produtox!\n" + rep.Message);
 				}
 
 				//Consegui o servico..
@@ -60,7 +60,7 @@ namespace ServidorPedidos.Modelo
 				var resp = clientP.Buscar(request);
 
 				if(resp.Response.Error != 0){
-					throw new Exception("Falha ao obter produto!\n" + resp.Response.Message);
+					throw new Exception("Falha ao obter produtoy!\n" + resp.Response.Message + " " + id.ToString());
 				}
 
 				produto = new Produto(resp.Produtos[0]);

@@ -15,6 +15,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Grpc" Version="1.16.0" />
     <PackageReference Include="Grpc.Tools" Version="1.16.0" />
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="grpc\ServidorProdutos.proto" />

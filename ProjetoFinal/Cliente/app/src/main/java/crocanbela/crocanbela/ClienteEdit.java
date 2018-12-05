@@ -76,7 +76,7 @@ public class ClienteEdit extends AppCompatActivity implements View.OnClickListen
         progress.setVisibility(View.VISIBLE);
         txtProgress.setVisibility(View.VISIBLE);
 
-        new Thread(
+        runOnUiThread(
                 new Runnable() {
                     @Override
                     public void run() {
@@ -170,7 +170,7 @@ public class ClienteEdit extends AppCompatActivity implements View.OnClickListen
                         }
                     }
                 }
-        ).start();
+        );
     }
 
 }

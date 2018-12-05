@@ -30,6 +30,13 @@ namespace ServidorNomes {
         __Marshaller_ServidorNomes_ServicoRequest,
         __Marshaller_ServidorNomes_ServicoResponse);
 
+    static readonly grpc::Method<global::ServidorNomes.RegistroServico, global::ServidorNomes.ServicoResponse> __Method_AtualizarEstado = new grpc::Method<global::ServidorNomes.RegistroServico, global::ServidorNomes.ServicoResponse>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "AtualizarEstado",
+        __Marshaller_ServidorNomes_RegistroServico,
+        __Marshaller_ServidorNomes_ServicoResponse);
+
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -45,6 +52,11 @@ namespace ServidorNomes {
       }
 
       public virtual global::System.Threading.Tasks.Task<global::ServidorNomes.ServicoResponse> ObterServico(global::ServidorNomes.ServicoRequest request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::ServidorNomes.ServicoResponse> AtualizarEstado(global::ServidorNomes.RegistroServico request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -106,6 +118,22 @@ namespace ServidorNomes {
       {
         return CallInvoker.AsyncUnaryCall(__Method_ObterServico, null, options, request);
       }
+      public virtual global::ServidorNomes.ServicoResponse AtualizarEstado(global::ServidorNomes.RegistroServico request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return AtualizarEstado(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::ServidorNomes.ServicoResponse AtualizarEstado(global::ServidorNomes.RegistroServico request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_AtualizarEstado, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::ServidorNomes.ServicoResponse> AtualizarEstadoAsync(global::ServidorNomes.RegistroServico request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return AtualizarEstadoAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::ServidorNomes.ServicoResponse> AtualizarEstadoAsync(global::ServidorNomes.RegistroServico request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_AtualizarEstado, null, options, request);
+      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override NomesClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -119,7 +147,8 @@ namespace ServidorNomes {
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_Cadastrar, serviceImpl.Cadastrar)
-          .AddMethod(__Method_ObterServico, serviceImpl.ObterServico).Build();
+          .AddMethod(__Method_ObterServico, serviceImpl.ObterServico)
+          .AddMethod(__Method_AtualizarEstado, serviceImpl.AtualizarEstado).Build();
     }
 
   }

@@ -243,6 +243,8 @@ public class PedidoEdit extends AppCompatActivity implements View.OnClickListene
                     Order.RegistroPedido pedido = ped.build();
 
                     if(act1 == "Salvar") {
+                        System.out.println("Salvando algo...\n");
+
                         Order.PedidoResponse resp = blockStubPed.salvar(pedido);
 
                         if (resp.getError() != 0) {
