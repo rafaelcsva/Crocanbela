@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/ic_background2_fore"
     tools:context="crocanbela.crocanbela.TelaUsuario">
 
     <LinearLayout
@@ -24,7 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/ic_clientelogo_background"
             android:scrollbars="vertical" />
 
         <android.support.design.widget.FloatingActionButton

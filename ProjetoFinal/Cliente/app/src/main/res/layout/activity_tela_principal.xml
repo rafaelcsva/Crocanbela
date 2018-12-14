@@ -4,64 +4,83 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/ic_background2_fore"
     tools:context="crocanbela.crocanbela.TelaPrincipal">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/btUsuario"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:width="0dp"
-            android:background="@mipmap/ic_usuariop"
-            android:fontFamily="sans-serif-condensed"
-            android:text="Usuários"
-            android:textColor="@android:color/background_light"
-            android:textSize="36sp" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btCliente"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@mipmap/ic_launcher_crocanbela_cliente"
-            android:fontFamily="sans-serif-condensed"
-            android:text="Clientes"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="36sp" />
+            <TextView
+                android:id="@+id/txtUsuarioLogado"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@color/colorAccent"
+                android:text="Seja Bem Vindo, Usuario!"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
 
-        <Button
-            android:id="@+id/btProduto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@mipmap/ic_crocanbelaf_produtop"
-            android:fontFamily="sans-serif-condensed"
-            android:text="Produtos"
-            android:textColor="?attr/colorAccent"
-            android:textSize="36sp" />
+            <Button
+                android:id="@+id/btUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="132dp"
+                android:layout_weight="1"
+                android:width="0dp"
+                android:background="@mipmap/ic_usuario_foreground"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Usuários"
+                android:textColor="@android:color/background_light"
+                android:textSize="36sp" />
 
-        <Button
-            android:id="@+id/btPedido"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@mipmap/ic_crocanbela_pedidofore"
-            android:fontFamily="sans-serif-condensed"
-            android:text="Pedidos"
-            android:textColor="@android:color/black"
-            android:textSize="36sp" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/btCliente"
+                android:layout_width="match_parent"
+                android:layout_height="132dp"
+                android:layout_weight="2"
+                android:background="@mipmap/ic_cliente2_foreground"
+                android:elevation="8dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="CLIENTES"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="36sp" />
+
+            <Button
+                android:id="@+id/btProduto"
+                android:layout_width="match_parent"
+                android:layout_height="132dp"
+                android:layout_weight="1"
+                android:background="@mipmap/ic_produto_foreground"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Produtos"
+                android:textColor="?attr/colorAccent"
+                android:textSize="36sp" />
+
+            <Button
+                android:id="@+id/btPedido"
+                android:layout_width="match_parent"
+                android:layout_height="132dp"
+                android:layout_weight="1"
+                android:background="@mipmap/ic_crocanbela_pedidofore"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Pedidos"
+                android:textColor="@android:color/black"
+                android:textSize="36sp" />
+        </LinearLayout>
+    </ScrollView>
+
 </android.support.constraint.ConstraintLayout>

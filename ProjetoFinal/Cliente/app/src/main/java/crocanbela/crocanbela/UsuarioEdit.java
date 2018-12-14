@@ -20,7 +20,7 @@ import io.grpc.ManagedChannelBuilder;
 public class UsuarioEdit extends AppCompatActivity implements View.OnClickListener{
 
     EditText txtLogin, txtSenha;
-    Button btSalvar;
+    Button btSalvar, btExcluir;
     private ProgressBar progress;
     private TextView txtProgress;
     Common a = new Common();
@@ -36,6 +36,7 @@ public class UsuarioEdit extends AppCompatActivity implements View.OnClickListen
         txtProgress = (TextView) findViewById(R.id.txtStatus);
         progress = (ProgressBar) findViewById(R.id.progressB);
         btSalvar = (Button) findViewById(R.id.btSalvar);
+        btExcluir = (Button) findViewById(R.id.btExcluirUsuario);
 
         if(gb.curUserA) {
             txtLogin.setText(gb.curUser.login);
@@ -43,6 +44,7 @@ public class UsuarioEdit extends AppCompatActivity implements View.OnClickListen
         }
 
         btSalvar.setOnClickListener(this);
+        btExcluir.setOnClickListener(this);
     }
 
     @Override
@@ -62,7 +64,7 @@ public class UsuarioEdit extends AppCompatActivity implements View.OnClickListen
             act2 = "Salvando";
         }
 
-        System.out.println("clickado!");
+        System.out.println("clickado! " + act1);
         progress.setVisibility(View.VISIBLE);
         txtProgress.setVisibility(View.VISIBLE);
 

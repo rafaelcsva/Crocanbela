@@ -21,6 +21,10 @@ message RegistroPedido{
     repeated ProdutoItem itens = 9;
 }
 
+message Relogio{
+    int32 ticks = 1;
+}
+
 message PedidoResponse{
     RegistroPedido pedido = 1;
     string message = 2;

@@ -37,11 +37,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
     public void onClick(View v) {
         final Globals gb = (Globals) getApplication();
+        final TextView txtLogin = (TextView) findViewById(R.id.txtLogin1);
+        final TextView txtSenha = (TextView) findViewById(R.id.txtSenha1);
+        TextView txtIp = (TextView) findViewById(R.id.txtIpNome);
+        gb.hostNome = txtIp.getText().toString();
+
         final String hostNome = gb.hostNome;
         final int portNome = gb.portNome;
 
-        final TextView txtLogin = (TextView) findViewById(R.id.txtLogin1);
-        final TextView txtSenha = (TextView) findViewById(R.id.txtSenha1);
         final Login ctxLogin = this;
         System.out.println("clickado!");
         progress.setVisibility(View.VISIBLE);

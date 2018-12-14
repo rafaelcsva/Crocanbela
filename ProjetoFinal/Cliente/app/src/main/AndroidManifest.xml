@@ -14,7 +14,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Login"
-            android:theme="@style/CrocanbelaTheme">
+            android:theme="@style/CrocanbelaTheme"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
